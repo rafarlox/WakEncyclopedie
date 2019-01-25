@@ -1,0 +1,16 @@
+﻿<Window x:Class="WakEncyclopedie.View.FrmChooseSideRing"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WakEncyclopedie.View"
+        mc:Ignorable="d"
+        Title="Veuillez choisir sur quel côté équiper votre anneau." Height="102.721" Width="371.785" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Button x:Name="BtnRingLeft" Content="Équiper à gauche" HorizontalAlignment="Left" Margin="132,41,0,0" Width="101" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Click="BtnRingLeft_Click"/>
+        <Button x:Name="BtnRingRight" Content="Équiper à droite" HorizontalAlignment="Left" Margin="253,41,0,0" Width="101" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Click="BtnRingRight_Click"/>
+        <Button x:Name="BtnCancel" Content="Annuler" HorizontalAlignment="Left" Margin="10,41,0,0" Width="101" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Click="BtnCancel_Click"/>
+        <Label Content="Équiper l'anneau à droite ou à gauche ?" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="344" HorizontalContentAlignment="Center"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,26 @@
+﻿<Window x:Class="WakEncyclopedie.View.FrmAbout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WakEncyclopedie.View"
+        mc:Ignorable="d"
+        Title="WakEncyclopedie - À propos" Height="322" Width="551" Loaded="Window_Loaded">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="145,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.245,0.312" Height="180" Width="372" Background="#FFF0F0F0">
+            WakEncyclopedie est un programme de recherche et conception d'équipement (plus communément appelé builder) pour le jeu Wakfu, publié par Ankama Games.<LineBreak/><LineBreak/>
+            Ce programme n'a aucun lien avec Ankama Games. Toutes les données des divers équipements proviennent de l'encyclopédie accessible sur le site officiel de Wakfu (https://www.wakfu.com/fr/mmorpg). De ce fait, aucune utilisation commerciable de ce logiciel n'est autorisée.<LineBreak/><LineBreak/>
+            Le code source du programme est accessible sur GitHub.
+        </TextBlock>
+        <Label x:Name="LblProductName" Content="Label" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LblVersion" Content="Label" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LblCopyright" Content="Label" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LblCompanyName" Content="Label" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LblDate" Content="Janvier 2019" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top">
+            Développeur :<LineBreak/> <LineBreak/> 
+            Dario Genga (pseudonymes : Rafarlox, Wakfana)
+        </TextBlock>
+
+    </Grid>
+</Window>

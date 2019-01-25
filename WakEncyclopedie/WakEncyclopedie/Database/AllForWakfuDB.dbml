@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AllForWakfuDB" Class="AllForWakfuDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database\AllForWakfuDB.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="WakEncyclopedie.Properties.Settings" SettingsPropertyName="AllForWakfuDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Items" Member="Items">
+    <Type Name="Items">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="[level]" Member="level" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="image" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="url" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="idType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idRarity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Items_Items_Have_Stats" Member="Items_Have_Stats" ThisKey="Id" OtherKey="IdItem" Type="Items_Have_Stats" />
+      <Association Name="Type_Items_Items" Member="Type_Items" ThisKey="idType" OtherKey="Id" Type="Type_Items" IsForeignKey="true" />
+      <Association Name="Rarity_Items" Member="Rarity" ThisKey="idRarity" OtherKey="Id" Type="Rarity" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Type_Items" Member="Type_Items">
+    <Type Name="Type_Items">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="image" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Type_Items_Items" Member="Items" ThisKey="Id" OtherKey="idType" Type="Items" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rarity" Member="Rarity">
+    <Type Name="Rarity">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="image" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Rarity_Items" Member="Items" ThisKey="Id" OtherKey="idRarity" Type="Items" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Stats" Member="Stats">
+    <Type Name="Stats">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Stats_Items_Have_Stats" Member="Items_Have_Stats" ThisKey="Id" OtherKey="IdStats" Type="Items_Have_Stats" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Items_Have_Stats" Member="Items_Have_Stats">
+    <Type Name="Items_Have_Stats">
+      <Column Name="IdItem" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdStats" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="value" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Items_Items_Have_Stats" Member="Items" ThisKey="IdItem" OtherKey="Id" Type="Items" IsForeignKey="true" />
+      <Association Name="Stats_Items_Have_Stats" Member="Stats" ThisKey="IdStats" OtherKey="Id" Type="Stats" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

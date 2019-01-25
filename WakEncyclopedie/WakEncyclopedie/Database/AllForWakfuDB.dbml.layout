@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="AllForWakfuDB">
+  <DataContextMoniker Name="/AllForWakfuDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="9f1df15e-e33f-41dd-a22f-e913127424e2" absoluteBounds="4.25, 1.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/AllForWakfuDBDataContext/Items" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2614beec-dd30-4711-b5a2-bc4a56e99af8" absoluteBounds="4.2650000000000006, 1.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="309cd47c-95c2-43d6-b5ff-34ccc054eb28" absoluteBounds="4.375, 4.875, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/AllForWakfuDBDataContext/Type_Items" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a55f5f1a-49b2-4194-aa95-e664571b5714" absoluteBounds="4.3900000000000006, 5.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="302eca7c-63d6-429a-82dc-887c58682a21" absoluteBounds="1.125, 1.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/AllForWakfuDBDataContext/Rarity" />
+      <nestedChildShapes>
+        <elementListCompartment Id="20ef118b-2a2d-410c-b345-9d21910fcf34" absoluteBounds="1.1400000000000001, 2.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="25245b36-809e-4bdc-b25c-5ed8278ffad8" absoluteBounds="8.125, 4.5, 2, 1.1939925130208327">
+      <DataClassMoniker Name="/AllForWakfuDBDataContext/Stats" />
+      <nestedChildShapes>
+        <elementListCompartment Id="743bf379-b56f-4f80-8807-71a047a18b76" absoluteBounds="8.14, 4.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.3125 : 4.875); (5.3125 : 3.65549967447917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AllForWakfuDBDataContext/Type_Items/Type_Items_Items" />
+      <nodes>
+        <classShapeMoniker Id="309cd47c-95c2-43d6-b5ff-34ccc054eb28" />
+        <classShapeMoniker Id="9f1df15e-e33f-41dd-a22f-e913127424e2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.125 : 2.44314697265625); (4.25 : 2.44314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AllForWakfuDBDataContext/Rarity/Rarity_Items" />
+      <nodes>
+        <classShapeMoniker Id="302eca7c-63d6-429a-82dc-887c58682a21" />
+        <classShapeMoniker Id="9f1df15e-e33f-41dd-a22f-e913127424e2" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="61f83b08-5168-479d-8fa8-bdae28d98163" absoluteBounds="7.875, 2.125, 2, 1.3862939453125">
+      <DataClassMoniker Name="/AllForWakfuDBDataContext/Items_Have_Stats" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e94e3256-2a8e-44b3-aec9-709fede64dd5" absoluteBounds="7.8900000000000006, 2.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.25 : 2.81814697265625); (7.875 : 2.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AllForWakfuDBDataContext/Items/Items_Items_Have_Stats" />
+      <nodes>
+        <classShapeMoniker Id="9f1df15e-e33f-41dd-a22f-e913127424e2" />
+        <classShapeMoniker Id="61f83b08-5168-479d-8fa8-bdae28d98163" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9 : 4.5); (9 : 3.5112939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AllForWakfuDBDataContext/Stats/Stats_Items_Have_Stats" />
+      <nodes>
+        <classShapeMoniker Id="25245b36-809e-4bdc-b25c-5ed8278ffad8" />
+        <classShapeMoniker Id="61f83b08-5168-479d-8fa8-bdae28d98163" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

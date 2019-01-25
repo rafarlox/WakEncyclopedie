@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="WakEncyclopedie.UcStatsItems"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WakEncyclopedie"
+             mc:Ignorable="d" Height="275" Width="275">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="#FFB6E1FF" Opacity="0.5"/>
+        </Grid.Background>
+        <Image Name="ImgItemRarity" HorizontalAlignment="Left" Height="20" Margin="10,6,0,0" VerticalAlignment="Top" Width="16"/>
+        <TextBlock Name="LblItemName" Text="Nom de l'équipement" HorizontalAlignment="Left" Margin="26,6,0,0" VerticalAlignment="Top" Height="20" FontSize="12" MouseLeftButtonDown="LblItemName_MouseLeftButtonDown" Background="{x:Null}" MouseEnter="LblItemName_MouseEnter" MouseLeave="LblItemName_MouseLeave">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Voir l'objet dans l'encyclopédie</TextBlock>
+                        <TextBlock>Ctrl+Clic gauche pour afficher l'objet dans votre navigateur.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </TextBlock.ToolTip>
+        </TextBlock>
+        <Image Name="ImgItemPicture" HorizontalAlignment="Left" Height="40" Margin="10,31,0,0" VerticalAlignment="Top" Width="40"/>
+        <Label x:Name="LblItemLvl" Content="Niv. 200" HorizontalAlignment="Right" Margin="0,13,10,0" VerticalAlignment="Top" Height="23" FontSize="12"/>
+        <Label x:Name="LblItemType" Content="Type de l'objet" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Height="26" FontSize="12"/>
+        <Label x:Name="LblItemRarity" Content="Rareté de l'objet" HorizontalAlignment="Right" Margin="0,36,10,0" VerticalAlignment="Top" Height="30" FontSize="12"/>
+        <ListBox Name="LbxItemStats" HorizontalAlignment="Left" Height="148" Margin="10,92,0,0" VerticalAlignment="Top" Width="255">
+            <!--<ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Value}" />
+                        <TextBlock Text="{Binding Path=Type}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>-->
+        </ListBox>
+        <Button x:Name="BtnEquip" Content="Équiper" HorizontalAlignment="Left" Margin="98,69,0,0" VerticalAlignment="Top" Width="70" Visibility="Visible"/>
+        <Button x:Name="BtnRemove" Content="Retirer" HorizontalAlignment="Left" Margin="170,69,0,0" VerticalAlignment="Top" Width="70" Visibility="Hidden"/>
+        <Label x:Name="LblInfo" Content="" Foreground="Red" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="230"/>
+    </Grid>
+</UserControl>

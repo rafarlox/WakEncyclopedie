@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakEncyclopedie", "WakEncyclopedie\WakEncyclopedie.csproj", "{90595B8C-1236-4602-8BF1-0F0E89325844}"
+EndProject
+Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "WakEncyclopedieInstaller", "WakEncyclopedieInstaller\WakEncyclopedieInstaller.aiproj", "{FE0E69AC-657B-4033-B54F-C72078BA99A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		All|Any CPU = All|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90595B8C-1236-4602-8BF1-0F0E89325844}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{90595B8C-1236-4602-8BF1-0F0E89325844}.All|Any CPU.Build.0 = Release|Any CPU
+		{90595B8C-1236-4602-8BF1-0F0E89325844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90595B8C-1236-4602-8BF1-0F0E89325844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90595B8C-1236-4602-8BF1-0F0E89325844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90595B8C-1236-4602-8BF1-0F0E89325844}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE0E69AC-657B-4033-B54F-C72078BA99A4}.All|Any CPU.ActiveCfg = DefaultBuild
+		{FE0E69AC-657B-4033-B54F-C72078BA99A4}.All|Any CPU.Build.0 = DefaultBuild
+		{FE0E69AC-657B-4033-B54F-C72078BA99A4}.Debug|Any CPU.ActiveCfg = DefaultBuild
+		{FE0E69AC-657B-4033-B54F-C72078BA99A4}.Debug|Any CPU.Build.0 = DefaultBuild
+		{FE0E69AC-657B-4033-B54F-C72078BA99A4}.Release|Any CPU.ActiveCfg = DefaultBuild
+		{FE0E69AC-657B-4033-B54F-C72078BA99A4}.Release|Any CPU.Build.0 = DefaultBuild
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C9FB760-4678-4AE8-87FC-95D2D111853C}
+	EndGlobalSection
+EndGlobal
