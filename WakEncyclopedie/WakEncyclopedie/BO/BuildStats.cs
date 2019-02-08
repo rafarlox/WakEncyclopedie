@@ -161,7 +161,7 @@ namespace WakEncyclopedie {
         private List<Stat> CreateGuildBonusStats() {
             return new List<Stat>() {
                 new Stat(GlobalConstants.HEALTH_POINTS_ID, GlobalConstants.HEALTH_STRING, 65),
-                new Stat(GlobalConstants.INITIATIVE_ID, "Initiative", 20),
+                new Stat(GlobalConstants.INITIATIVE_ID, "Initiative", 10),
                 new Stat(GlobalConstants.DODGE_ID, "Esquive", 20),
                 new Stat(GlobalConstants.LOCK_ID, "Tacle", 20),
                 new Stat(GlobalConstants.RESISTANCE_ALL_ID, "Résistance", 20),
@@ -235,7 +235,7 @@ namespace WakEncyclopedie {
         }
 
         public void CalculateBuildStats() {
-            ResetBuildStat();
+            ResetStatsOfBuild();
             CalculateStatsPerLevel();
             CalculteSkillsStats();
             CalculateGuildBonusStats();
@@ -436,7 +436,13 @@ namespace WakEncyclopedie {
             AirResistance += value;
         }
 
-        private void ResetBuildStat() {
+        public void ResetBuildStats() {
+            NationBonusLevel = 0;
+            GuildBonusActived = false;
+            ResetStatsOfBuild();
+        }
+
+        private void ResetStatsOfBuild() {
             Armor = 0;
             ActionPoint = BASE_AP;
             MovementPoint = BASE_MP;

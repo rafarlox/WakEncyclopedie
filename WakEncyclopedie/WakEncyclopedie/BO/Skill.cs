@@ -83,6 +83,7 @@ namespace WakEncyclopedie.BO
         private const int LEVEL_AFTER_FOR_STREGTH = 1;
         private const int LEVEL_AFTER_FOR_AGILITY = 2;
         private const int LEVEL_AFTER_FOR_LUCK = 3;
+        private const int MAX_POINTS_FOR_SKILLS = 50;
 
         public Build ActualBuild { get; set; }
 
@@ -175,7 +176,7 @@ namespace WakEncyclopedie.BO
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        private double RoundToZero(double value) {
+        private double RoundForLuck(double value) {
             // This method is necessary when we have a value like 19.5 : Math.Round will round this value at 20 and not a 19...
             double decimalPart = value - Math.Truncate(value);
             if (decimalPart == 0.5) {
@@ -185,13 +186,36 @@ namespace WakEncyclopedie.BO
             return value;
         }
 
+        public int CalculatePointsForIntelligence(int buildLevel) {
+            return (int)Math.Round(buildLevel / LEVEL_INTERVAL_FOR_SKILLS, MidpointRounding.AwayFromZero);
+        }
+
+        public int CalculatePointsForStrength(int buildLevel) {
+            return (int)Math.Floor((buildLevel + LEVEL_AFTER_FOR_STREGTH) / LEVEL_INTERVAL_FOR_SKILLS);
+        }
+
+        public int CalculatePointsForAgility(int buildLevel) {
+            return (int)(Math.Round((buildLevel + LEVEL_AFTER_FOR_AGILITY) / LEVEL_INTERVAL_FOR_SKILLS, MidpointRounding.AwayFromZero) - CORRECTION_FOR_SKILLS);
+        }
+
+        public int CalculatePointsForLuck(int buildLevel) {
+            if (buildLevel == 200) {
+                return MAX_POINTS_FOR_SKILLS;
+            } else {
+                return (int)(Math.Floor((buildLevel + LEVEL_AFTER_FOR_LUCK) / LEVEL_INTERVAL_FOR_SKILLS) - CORRECTION_FOR_SKILLS);
+            }
+        }
+
+        public int CalculatePointsForMajor(int buildLevel) {
+            return (int)Math.Round(buildLevel / LEVEL_INTERVAL_FOR_MAJOR_SKILLS, MidpointRounding.AwayFromZero);
+        }
         private void CalculatePointsToDistributed() {
             if (ActualBuild.LevelBuild >= FIRST_LEVEL_FOR_SKILLS) {
-                MaxIntelligencePointsRemaining = (int)Math.Round(ActualBuild.LevelBuild / LEVEL_INTERVAL_FOR_SKILLS, MidpointRounding.AwayFromZero);
-                MaxStrengthPointsRemaining = (int)Math.Floor((ActualBuild.LevelBuild + LEVEL_AFTER_FOR_STREGTH) / LEVEL_INTERVAL_FOR_SKILLS);
-                MaxAgilityPointsRemaining = (int)(Math.Round((ActualBuild.LevelBuild + LEVEL_AFTER_FOR_AGILITY) / LEVEL_INTERVAL_FOR_SKILLS, MidpointRounding.AwayFromZero) - CORRECTION_FOR_SKILLS);
-                MaxLuckPointsRemaining = (int)(Math.Round(RoundToZero((ActualBuild.LevelBuild + LEVEL_AFTER_FOR_LUCK) / LEVEL_INTERVAL_FOR_SKILLS)) - CORRECTION_FOR_SKILLS);
-                MaxMajorPointsRemaining = (int)Math.Round(ActualBuild.LevelBuild / LEVEL_INTERVAL_FOR_MAJOR_SKILLS, MidpointRounding.AwayFromZero);
+                MaxIntelligencePointsRemaining = CalculatePointsForIntelligence(ActualBuild.LevelBuild);
+                MaxStrengthPointsRemaining = CalculatePointsForStrength(ActualBuild.LevelBuild);
+                MaxAgilityPointsRemaining = CalculatePointsForAgility(ActualBuild.LevelBuild);
+                MaxLuckPointsRemaining = CalculatePointsForLuck(ActualBuild.LevelBuild);
+                MaxMajorPointsRemaining = CalculatePointsForMajor(ActualBuild.LevelBuild);
             } else {
                 MaxIntelligencePointsRemaining = 0;
                 MaxStrengthPointsRemaining = 0;

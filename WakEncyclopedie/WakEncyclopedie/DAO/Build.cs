@@ -136,15 +136,17 @@ namespace WakEncyclopedie.DAO {
             List<EnchantedItem> items = GetBuildItems();
             if (item.IdRarity == RARITY_ID_RELIC || item.IdRarity == RARITY_ID_EPIC) {
                 // We can't equip the item if that will engender more thant one epic or one relic
-                if (items.Any(x => x.IdRarity == item.IdRarity)){
+                if (items.Any(x => x.IdRarity == item.IdRarity) && !items.Any(x => x.Id == item.Id)) {
                     return false;
                 }
             }
             return true;
         }
 
-        private void ResetBuild() {
+        public void ResetBuild() {
             RemoveAllItem();
+            BStats.ResetBuildStats();
+            LevelBuild = GlobalConstants.MAX_LEVEL;
         }
 
         #region Equip methods

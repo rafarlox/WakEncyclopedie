@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WakEncyclopedie"
         xmlns:View="clr-namespace:WakEncyclopedie.View" x:Name="FrmMain" x:Class="WakEncyclopedie.MainWindow"
         mc:Ignorable="d"
-        Title="WakEncyclopédie - Builder Wakfu" Height="800" Width="1480" Loaded="FrmMain_Loaded" WindowStartupLocation="CenterScreen">
+        Title="WakEncyclopédie - Builder Wakfu" Height="830" Width="1406.5" Loaded="FrmMain_Loaded" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Application x:Key="Wakencyclopedie.allForWakfuDBDataSet"/>
         <!--<CollectionViewSource x:Key="itemsViewSource" Source="{Binding Items, Source={StaticResource allForWakfuDBDataSet}}"/>
@@ -25,8 +25,29 @@
         </Style>
     </Window.Resources>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <!-- Toolbar menus -->
+        <DockPanel>
+            <ToolBarTray VerticalAlignment="Top" Height="27" IsLocked="True" >
+                <ToolBar x:Name="TbtMain" Loaded="ToolBar_Loaded">
+                    <Menu>
+                        <MenuItem Header="Édition">
+                            <MenuItem Header="Tout déséquiper" Click="BtnRemoveAllItems_Click"></MenuItem>
+                            <MenuItem x:Name="MenuReset" Header="Réinitialiser le build" Click="MenuReset_Click"></MenuItem>
+                        </MenuItem>
+                        <MenuItem Header="À propos" Click="BtnAbout_Click"></MenuItem>
+                    </Menu>
+                </ToolBar>
+            </ToolBarTray>
+        </DockPanel>
         <!-- Data components -->
-        <DataGrid x:Name="ItemsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="550,267,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeight="30" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" SelectionMode="Single" AlternationCount="2" AlternatingRowBackground="Bisque" CellStyle="{StaticResource Body_Content_DataGrid_Centering}" SelectedCellsChanged="ItemsDataGrid_SelectedCellsChanged" MouseRightButtonUp="ItemsDataGrid_MouseRightButtonUp" MouseDown="ItemsDataGrid_MouseDown" Height="326" Width="464">
+        <DataGrid x:Name="ItemsDataGrid"
+                  AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" 
+                  Margin="550,155,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeight="30" IsReadOnly="True" 
+                  CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" SelectionMode="Single" 
+                  AlternationCount="2" AlternatingRowBackground="Bisque" CellStyle="{StaticResource Body_Content_DataGrid_Centering}"
+                  MouseRightButtonUp="ItemsDataGrid_MouseRightButtonUp" MouseDown="ItemsDataGrid_MouseDown" Height="619" Width="464"
+                  SelectedCellsChanged="ItemsDataGrid_SelectedCellsChanged" ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.ScrollChanged="ItemsDataGrid_ScrollChanged" Sorting="ItemsDataGrid_Sorting">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="id" Visibility="Hidden" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="urlColumn" Binding="{Binding Url}" Header="url" Visibility="Hidden" Width="SizeToHeader"/>
@@ -49,29 +70,27 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="BtnShowNextItems" Content="&gt;" HorizontalAlignment="Left" Margin="938,598,0,0" VerticalAlignment="Top" Width="76" Click="BtnShowNextItems_Click"/>
-        <Button x:Name="BtnShowPreviousItems" Content="&lt;" HorizontalAlignment="Left" Margin="550,598,0,0" VerticalAlignment="Top" Width="74" Click="BtnShowPreviousItems_Click"/>
-        <ContentControl x:Name="CCtrlItemStats" Content="" HorizontalAlignment="Left" Margin="1026,317,0,0" VerticalAlignment="Top" Height="276" Width="276"/>
+        <Button x:Name="BtnShowNextItems" Content="&gt;" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" Width="76" Click="BtnShowNextItems_Click" Visibility="Hidden"/>
+        <Button x:Name="BtnShowPreviousItems" Content="&lt;" HorizontalAlignment="Left" Margin="12,57,0,0" VerticalAlignment="Top" Width="74" Click="BtnShowPreviousItems_Click" Visibility="Hidden"/>
+        <ContentControl x:Name="CCtrlItemStats" Content="" HorizontalAlignment="Left" Margin="1067,498,0,0" VerticalAlignment="Top" Height="276" Width="276"/>
         <!-- Search components -->
-        <TextBox x:Name="TbxNameSearch" HorizontalAlignment="Left" Height="24" Margin="602,94,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="332" MaxLength="50"/>
-        <Label Content="Nom" HorizontalAlignment="Left" Margin="550,92,0,0" VerticalAlignment="Top"/>
-        <Label Content="Rareté" HorizontalAlignment="Left" Margin="550,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.614,0.538" Height="24"/>
-        <View:UcMultiSelectComboBox x:Name="MscbxRarity" HorizontalAlignment="Left" Height="22" Margin="602,122,0,0" VerticalAlignment="Top" Width="158"/>
-        <View:UcMultiSelectComboBox x:Name="MscbxStats" HorizontalAlignment="Left" Height="22" Margin="602,148,0,0" VerticalAlignment="Top" Width="158"/>
-        <View:UcMultiSelectComboBox x:Name="MscbxType" HorizontalAlignment="Left" Height="22" Margin="804,122,0,0" VerticalAlignment="Top" Width="130"/>
-        <Label Content="Type" HorizontalAlignment="Left" Margin="764,120,0,0" VerticalAlignment="Top"/>
-        <Label Content="Lvl." HorizontalAlignment="Left" Margin="764,144,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TbxItemLvlMinSearch" HorizontalAlignment="Left" Height="22" Margin="804,150,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28" MaxLength="3" PreviewTextInput="TbxItemLvlSearch_PreviewTextInput" TextChanged="TbxItemLvlSearch_TextChanged" LostFocus="TbxItemLvlSearch_LostFocus" TextAlignment="Center" CommandManager.PreviewExecuted="TbxItemLvlSearch_PreviewExecuted" ContextMenu="{x:Null}"/>
-        <TextBox x:Name="TbxItemLvlMaxSearch" HorizontalAlignment="Left" Height="22" Margin="858,150,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="28" MaxLength="3" PreviewTextInput="TbxItemLvlSearch_PreviewTextInput" TextChanged="TbxItemLvlSearch_TextChanged" LostFocus="TbxItemLvlSearch_LostFocus" TextAlignment="Center" CommandManager.PreviewExecuted="TbxItemLvlSearch_PreviewExecuted" ContextMenu="{x:Null}"/>
-        <Label Content="-" HorizontalAlignment="Left" Margin="836,146,0,0" VerticalAlignment="Top"/>
-        <Label Content="Bonus" HorizontalAlignment="Left" Margin="550,144,0,0" VerticalAlignment="Top" Height="28"/>
-        <Button x:Name="BtnSearchItems" Content="Rechercher" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="938,242,0,0" Width="76" Click="BtnSearchItems_Click" IsDefault="True"/>
+        <TextBox x:Name="TbxNameSearch" HorizontalAlignment="Left" Height="24" Margin="603,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="332" MaxLength="50"/>
+        <Label Content="Nom" HorizontalAlignment="Left" Margin="551,70,0,0" VerticalAlignment="Top"/>
+        <Label Content="Rareté" HorizontalAlignment="Left" Margin="551,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.614,0.538" Height="24"/>
+        <View:UcMultiSelectComboBox x:Name="MscbxRarity" HorizontalAlignment="Left" Height="22" Margin="603,100,0,0" VerticalAlignment="Top" Width="158"/>
+        <View:UcMultiSelectComboBox x:Name="MscbxStats" HorizontalAlignment="Left" Height="22" Margin="603,126,0,0" VerticalAlignment="Top" Width="158"/>
+        <View:UcMultiSelectComboBox x:Name="MscbxType" HorizontalAlignment="Left" Height="22" Margin="805,100,0,0" VerticalAlignment="Top" Width="130"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="765,98,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lvl." HorizontalAlignment="Left" Margin="765,122,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TbxItemLvlMinSearch" HorizontalAlignment="Left" Height="22" Margin="805,128,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28" MaxLength="3" PreviewTextInput="TbxItemLvlSearch_PreviewTextInput" TextChanged="TbxItemLvlSearch_TextChanged" LostFocus="TbxItemLvlSearch_LostFocus" TextAlignment="Center" CommandManager.PreviewExecuted="TbxItemLvlSearch_PreviewExecuted" ContextMenu="{x:Null}"/>
+        <TextBox x:Name="TbxItemLvlMaxSearch" HorizontalAlignment="Left" Height="22" Margin="859,128,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="28" MaxLength="3" PreviewTextInput="TbxItemLvlSearch_PreviewTextInput" TextChanged="TbxItemLvlSearch_TextChanged" LostFocus="TbxItemLvlSearch_LostFocus" TextAlignment="Center" CommandManager.PreviewExecuted="TbxItemLvlSearch_PreviewExecuted" ContextMenu="{x:Null}"/>
+        <Label Content="-" HorizontalAlignment="Left" Margin="837,124,0,0" VerticalAlignment="Top"/>
+        <Label Content="Bonus" HorizontalAlignment="Left" Margin="551,122,0,0" VerticalAlignment="Top" Height="28"/>
+        <Button x:Name="BtnSearchItems" Content="Rechercher" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="938,130,0,0" Width="76" Click="BtnSearchItems_Click" IsDefault="True"/>
         <!-- Build components -->
-        <View:UcEquipements x:Name="UcActualEquipements" HorizontalAlignment="Left" Height="282" Margin="1074,35,0,0" VerticalAlignment="Top" Width="198"/>
-
-        <Button x:Name="BtnRemoveAllItems" Content="Tout déséquiper" HorizontalAlignment="Left" Margin="1196,598,0,0" VerticalAlignment="Top" Width="106" Click="RemoveAllItems_Click"/>
-        <TabControl x:Name="TctrlBuildStats" HorizontalAlignment="Left" Height="728" Margin="95,12,0,0" VerticalAlignment="Top" Width="450">
-            <TabItem x:Name="TitmStats" Header="Carac.">
+        <View:UcEquipements x:Name="UcActualEquipements" HorizontalAlignment="Left" Height="282" Margin="1108,155,0,0" VerticalAlignment="Top" Width="198"/>
+        <TabControl x:Name="TctrlBuildStats" HorizontalAlignment="Left" Height="728" Margin="95,46,0,0" VerticalAlignment="Top" Width="450">
+            <TabItem x:Name="TitmStats" Header="Caractèristiques">
                 <Grid>
                     <View:UcBuildStats x:Name="UcActualBuildStats" HorizontalAlignment="Left" Height="690" VerticalAlignment="Top" Width="430" Margin="10,10,0,0"/>
                 </Grid>
@@ -87,6 +106,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="BtnAbout" Content="À propos" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="75" Click="BtnAbout_Click"/>
     </Grid>
 </Window>

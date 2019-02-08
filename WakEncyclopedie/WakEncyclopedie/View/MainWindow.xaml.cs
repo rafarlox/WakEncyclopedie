@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -19,6 +21,11 @@ namespace WakEncyclopedie {
         private EncyclopediaDB EncycloDB { get; set; }
         private Build ActualBuild { get; set; }
         public bool? InsertRingToLeft = null;
+        private bool IsScrollAlreadyAtTheEnd = false;
+        private double PreviousScrollVerticalOffset { get; set; }
+        private bool ChangeVerticalOffset = false;
+        private int ActualSortedColumnIndex { get; set; }
+        private ListSortDirection ActualSortDirection { get; set; }
 
         public MainWindow() {
             InitializeComponent();
@@ -31,22 +38,27 @@ namespace WakEncyclopedie {
         /// Load the differents data to the form
         /// </summary>
         private void FrmMain_Loaded(object sender, RoutedEventArgs e) {
-            // Load the actual build to the UserControls
-            UcActualBuildStats.UcBuild = ActualBuild;
-            UcActualCustomBuildStats.UcBuild = ActualBuild;
-            UcActualSkillsManager.ActualSkills = ActualBuild.BSkill;
+            try {
+                // Load the actual build to the UserControls
+                UcActualBuildStats.UcBuild = ActualBuild;
+                UcActualCustomBuildStats.UcBuild = ActualBuild;
+                UcActualSkillsManager.ActualSkills = ActualBuild.BSkill;
 
-            // Load data in datagrid and combobox
-            ItemsDataGrid.ItemsSource = EncycloDB.GetAllItemsWithImg();
-            MscbxRarity.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllRarities();
-            MscbxType.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllTypes();
-            MscbxStats.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllStats();
+                // Load data in datagrid and combobox
+                ItemsDataGrid.ItemsSource = EncycloDB.GetAllItemsWithImg();
 
-            // Create events
-            CreateBuildImagesEvents();
-            // Create an event that will trigger when the data of the datagrid are updated
-            CollectionView myCollectionView = (CollectionView)CollectionViewSource.GetDefaultView(ItemsDataGrid.Items);
-            ((INotifyCollectionChanged)myCollectionView).CollectionChanged += ItemsDataGrid_CollectionChanged;
+                MscbxRarity.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllRarities();
+                MscbxType.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllTypes();
+                MscbxStats.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllStats();
+
+                // Create events
+                CreateBuildImagesEvents();
+                // Create an event that will trigger when the data of the datagrid are updated
+                CollectionView myCollectionView = (CollectionView)CollectionViewSource.GetDefaultView(ItemsDataGrid.Items);
+                ((INotifyCollectionChanged)myCollectionView).CollectionChanged += ItemsDataGrid_CollectionChanged;
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         /// <summary>
@@ -54,7 +66,7 @@ namespace WakEncyclopedie {
         /// <para>If we don't have enough items in the datagrid, then we disable the "Next button"</para>
         /// </summary>
         private void ItemsDataGrid_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-            if (ItemsDataGrid.Items.Count < EncyclopediaDB.NB_ITEMS_DISPLAYED) {
+            if (ItemsDataGrid.Items.Count < EncyclopediaDB.ITEMS_TO_LOAD) {
                 BtnShowNextItems.IsEnabled = false;
             } else {
                 BtnShowNextItems.IsEnabled = true;
@@ -154,6 +166,10 @@ namespace WakEncyclopedie {
             int[] idStats = GetIntArrayOfSelectedElements(MscbxStats.ListElements);
 
             ItemsDataGrid.ItemsSource = EncycloDB.SearchItems(minLvl, maxLvl, nameItem, idRarities, idTypes, idStats);
+            ActualSortedColumnIndex = 0; // Reset the sort
+            if (ItemsDataGrid.Items.Count > 0) {
+                ItemsDataGrid.ScrollIntoView(ItemsDataGrid.Items[0]);
+            }
         }
         #endregion Search events
 
@@ -174,7 +190,7 @@ namespace WakEncyclopedie {
             UcActualEquipements.ImgRingLeft.MouseDown += Image_MouseDown;
             UcActualEquipements.ImgRingRight.MouseDown += Image_MouseDown;
         }
-        
+
         /// <summary>
         /// Event that is triggered when we click on an image of the equipement
         /// </summary>
@@ -218,7 +234,7 @@ namespace WakEncyclopedie {
             // We have to bring the modal form in front after displaying it
             modal.Topmost = true;
         }
-        
+
         /// <summary>
         /// Load the item selected with formated stats to the user control for stats
         /// </summary>
@@ -437,7 +453,7 @@ namespace WakEncyclopedie {
                 UcActualBuildStats.UpdateView();
             } else {
                 ucStatsParent.LblInfo.Content = "Pas assez d'éléments sélectionnées.";
-            }            
+            }
         }
 
         private void RemoveItemToBuild(object sender, RoutedEventArgs e) {
@@ -451,7 +467,7 @@ namespace WakEncyclopedie {
         }
 
 
-        private void RemoveAllItems_Click(object sender, RoutedEventArgs e) {
+        private void BtnRemoveAllItems_Click(object sender, RoutedEventArgs e) {
             // TODO: Add messagebox of confirmation
             ActualBuild.RemoveAllItem();
             UcActualBuildStats.UpdateView();
@@ -482,6 +498,78 @@ namespace WakEncyclopedie {
         private void BtnAbout_Click(object sender, RoutedEventArgs e) {
             FrmAbout frm = new FrmAbout();
             frm.ShowDialog();
+        }
+
+        /// <summary>
+        /// Remove the Overflow Toogle Button of the Toolbar
+        /// Source : https://stackoverflow.com/a/1051264
+        /// </summary>
+        private void ToolBar_Loaded(object sender, RoutedEventArgs e) {
+            ToolBar toolBar = sender as ToolBar;
+            var overflowGrid = toolBar.Template.FindName("OverflowGrid", toolBar) as FrameworkElement;
+            if (overflowGrid != null) {
+                overflowGrid.Visibility = Visibility.Collapsed;
+            }
+            var mainPanelBorder = toolBar.Template.FindName("MainPanelBorder", toolBar) as FrameworkElement;
+            if (mainPanelBorder != null) {
+                mainPanelBorder.Margin = new Thickness();
+            }
+        }
+
+        private void MenuReset_Click(object sender, RoutedEventArgs e) {
+            ActualBuild.ResetBuild();
+            UcActualBuildStats.UpdateView();
+        }
+
+        /// <summary>
+        /// Lazy loading of items
+        /// </summary>
+        private void ItemsDataGrid_ScrollChanged(object sender, ScrollChangedEventArgs e) {
+            ScrollViewer scrollViewer = (ScrollViewer)e.OriginalSource;
+            if (ChangeVerticalOffset) {
+                scrollViewer.ScrollToVerticalOffset(PreviousScrollVerticalOffset);
+                ChangeVerticalOffset = false;
+            } else {
+                PreviousScrollVerticalOffset = e.VerticalOffset;
+                // Trigger when the scrollbar is at the end
+                if (e.VerticalOffset == scrollViewer.ScrollableHeight && e.VerticalOffset != 0 && !IsScrollAlreadyAtTheEnd) {
+                    ItemsDataGrid.ItemsSource = EncycloDB.LoadNewItems();
+                    if (ActualSortedColumnIndex != 0) {
+                        ItemsDataGrid.Columns[ActualSortedColumnIndex].SortDirection = ActualSortDirection;
+                    }
+                    IsScrollAlreadyAtTheEnd = true;
+                    ChangeVerticalOffset = true;
+                } else {
+                    IsScrollAlreadyAtTheEnd = false;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Manage the sort of the items
+        /// </summary>
+        private void ItemsDataGrid_Sorting(object sender, DataGridSortingEventArgs e) {
+            if (e.Column.SortDirection == null || e.Column.SortDirection == ListSortDirection.Descending) {
+                // Sort by asc
+                ItemsDataGrid.ItemsSource = EncycloDB.SortPreviousSearch(e.Column.SortMemberPath, ListSortDirection.Ascending);
+                ItemsDataGrid.Columns[e.Column.DisplayIndex].SortDirection = ListSortDirection.Descending; // Inversed sort because the event will automatically inverse it again
+                ActualSortDirection = ListSortDirection.Ascending;
+            } else {
+                // Sort by desc
+                ItemsDataGrid.ItemsSource = EncycloDB.SortPreviousSearch(e.Column.SortMemberPath, ListSortDirection.Descending);
+                ItemsDataGrid.Columns[e.Column.DisplayIndex].SortDirection = ListSortDirection.Ascending; // Inversed sort because the event will automatically inverse it again
+                ActualSortDirection = ListSortDirection.Descending;
+            }
+            ActualSortedColumnIndex = e.Column.DisplayIndex;
+
+            // Scroll to top after the sorting
+            // source: https://social.msdn.microsoft.com/Forums/en-US/fdccbf75-bd1c-41c6-b209-71d6537603df/datagrid-event-after-columns-sorting
+            Dispatcher.BeginInvoke((Action)delegate () {
+                if (ItemsDataGrid.Items.Count > 0) {
+                    ItemsDataGrid.ScrollIntoView(ItemsDataGrid.Items[0]);
+                }
+            }, null);
         }
     }
 }

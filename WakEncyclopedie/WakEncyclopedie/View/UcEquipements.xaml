@@ -4,21 +4,96 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WakEncyclopedie.View"
-             mc:Ignorable="d">
-    <Grid Height="266" Width="176">
-        <Image x:Name="ImgHelmet" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Helmet.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40"/>
-        <Image x:Name="ImgCloak" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Cloak.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="135,0,0,0"/>
-        <Image x:Name="ImgAmulet" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Amulet.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="0,45,0,0" RenderTransformOrigin="0.567,0.575"/>
-        <Image x:Name="ImgEpaulettes" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Epaulettes.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="135,45,0,0" RenderTransformOrigin="0.567,0.575"/>
-        <Image x:Name="ImgBreastplate" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Breastplate.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="0,90,0,0" RenderTransformOrigin="0.567,0.575"/>
-        <Image x:Name="ImgBelt" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Belt.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="135,90,0,0" RenderTransformOrigin="0.567,0.575"/>
-        <Image x:Name="ImgRingLeft" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Ring.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="0,135,0,0" RenderTransformOrigin="0.567,0.575"/>
-        <Image x:Name="ImgRingRight" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Ring.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="135,135,0,0" RenderTransformOrigin="0.567,0.575"/>
-        <Image x:Name="ImgBoots" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Boots.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="0,180,0,0" RenderTransformOrigin="0.567,0.575"/>
-        <Image x:Name="ImgPet" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Pet.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="135,180,0,0" RenderTransformOrigin="0.567,0.575"/>
-        <Image x:Name="ImgHandRight" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/OneHandedWeapon.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="90,207,0,0" RenderTransformOrigin="0.567,0.575"/>
-        <Image x:Name="ImgHandLeft" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/SecondHand.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="45,207,0,0" RenderTransformOrigin="0.567,0.575"/>
-        <Image x:Name="ImgMount" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Mount.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="135,225,0,0" RenderTransformOrigin="0.567,0.575"/>
-        <Image x:Name="ImgAccessory" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Emblem.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" Margin="0,225,0,0" RenderTransformOrigin="0.567,0.575"/>
+             mc:Ignorable="d" Height="266" Width="176">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.Resources>
+            <Style x:Key="BorderStyle" TargetType="Border">
+                <Setter Property="BorderThickness" Value="2"></Setter>
+                <Setter Property="BorderBrush" Value="CadetBlue"></Setter>
+            </Style>
+            <Style x:Key="GridStyle" TargetType="Grid">
+                <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                <Setter Property="Height" Value="42"></Setter>
+                <Setter Property="Width" Value="42"></Setter>
+            </Style>
+            <Style x:Key="ImageStyle" TargetType="Image">
+                <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                <Setter Property="Height" Value="40"></Setter>
+                <Setter Property="Width" Value="40"></Setter>
+                <Setter Property="Stretch" Value="Fill"></Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid Style="{StaticResource GridStyle}">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgHelmet" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Helmet_bw.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="135,0,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgCloak" Source="pack://application:,,,/Images/Cloak_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="0,45,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgAmulet" Source="pack://application:,,,/Images/Amulet_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="135,45,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgEpaulettes" Source="pack://application:,,,/Images/Epaulettes_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="0,90,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgBreastplate" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Breastplate_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="135,90,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgBelt" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Belt_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="0,135,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgRingLeft" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Ring_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="135,135,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgRingRight" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Ring_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="0,180,0,0" >
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgBoots" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Boots_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="135,180,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgPet" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Pet_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="90,207,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgHandRight" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/OneHandedWeapon_bw.png" Style="{StaticResource ImageStyle}" />
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="45,207,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgHandLeft" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/SecondHand_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="135,225,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgMount" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Mount_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}" Margin="0,225,0,0">
+            <Border Style="{StaticResource BorderStyle}">
+                <Image x:Name="ImgAccessory" Stretch="Fill" Height="40" Source="pack://application:,,,/Images/Emblem_bw.png" Style="{StaticResource ImageStyle}"/>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

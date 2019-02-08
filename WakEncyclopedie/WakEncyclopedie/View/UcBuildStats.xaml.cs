@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using WakEncyclopedie.DAO;
 using WakEncyclopedie.Utility;
@@ -27,17 +29,21 @@ namespace WakEncyclopedie.View {
             foreach (int i in BStats.NationsLevelsForBonus) {
                 CbbxNationBonus.Items.Add(i);
             }
-            CbbxNationBonus.SelectedValue = BStats.NationBonusLevel;
             // Fill the combobox of levels
             CbxLevel.Items.Clear();
             foreach (int lvl in GlobalConstants.MODULE_LEVELS) {
                 CbxLevel.Items.Add(lvl);
             }
-            CbxLevel.Text = UcBuild.LevelBuild.ToString();
             UpdateView();
         }
 
         public void UpdateView() {
+            // Build Level
+            CbxLevel.Text = UcBuild.LevelBuild.ToString();
+            // Guild bonus status
+            CbxGuildBonus.IsChecked = BStats.GuildBonusActived;
+            // Nation bonus level
+            CbbxNationBonus.SelectedValue = BStats.NationBonusLevel;
             // Major stats
             LblHp.Content = BStats.CalculateTotalHp();
             LblAp.Content = BStats.ActionPoint;
@@ -79,7 +85,6 @@ namespace WakEncyclopedie.View {
             LblAreaMastery.Content = BStats.AreaMastery;
             LblHealthMastery.Content = BStats.HealingMastery;
             LblBerserkMastery.Content = BStats.BerserkMastery;
-
             // Skills
             UcSkillsManager.UpdateView();
         }
@@ -147,6 +152,27 @@ namespace WakEncyclopedie.View {
 
         private void CbbxNationBonus_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e) {
             e.Handled = true;
+        }
+    }
+
+    public class IsLessThanConverter : IValueConverter {
+        public static readonly IValueConverter Instance = new IsLessThanConverter();
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            // remove % symbol
+            string v = value.ToString();
+            if (v.IndexOf('%') != -1) {
+                v = v.Remove(v.IndexOf('%'));
+            }
+            // convert values
+            int intValue = System.Convert.ToInt32(v);
+            int compareToValue = System.Convert.ToInt32(parameter);
+
+            return intValue < compareToValue;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+            throw new NotImplementedException();
         }
     }
 }

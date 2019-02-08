@@ -1,12 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using WakEncyclopedie.DAO;
 using WakEncyclopedie.Database;
 
 namespace WakEncyclopedie {
-    public class EncyclopediaDB
-    {
-        public const int NB_ITEMS_DISPLAYED = 10;
+    public class EncyclopediaDB {
+        public const string COLUMN_ITEM_NAME = "Name";
+        public const string COLUMN_ITEM_LEVEL = "Level";
+        public const string COLUMN_ITEM_RARITY = "RarityName";
+        public const int ITEMS_TO_LOAD = 30;
+        private int NbItemsDisplayed { get; set; }
         private const int MIN_PAGE_ITEMS = 1;
         private const int INCREMENT_PAGE_ITEMS = 1;
         private const int DECREMENT_PAGE_ITEMS = 1;
@@ -16,7 +21,9 @@ namespace WakEncyclopedie {
 
         public EncyclopediaDB()
         {
-            afwDC = new AllForWakfuDBDataContext();
+            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            afwDC = new AllForWakfuDBDataContext(string.Format(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={0}Database\AllForWakfuDB.mdf;Integrated Security=True;Connect Timeout=30", currentDirectory));
+            NbItemsDisplayed = ITEMS_TO_LOAD;
         }
 
         private int ActualPageItems
@@ -37,7 +44,17 @@ namespace WakEncyclopedie {
         /// </summary>
         private dynamic ExecuteQueryWithPagination()
         {
-            return PagingExtensions.Page(PreviousQuery, ActualPageItems, NB_ITEMS_DISPLAYED);
+            return PagingExtensions.Page(PreviousQuery, ActualPageItems, NbItemsDisplayed);
+        }
+
+        public dynamic LoadNewItems() {
+            NbItemsDisplayed += ITEMS_TO_LOAD;
+            return ExecuteQueryWithPagination();
+        }
+
+        private dynamic ResetItemsDisplayed() {
+            NbItemsDisplayed = ITEMS_TO_LOAD;
+            return ExecuteQueryWithPagination();
         }
 
         public dynamic GoToNextItems()
@@ -100,7 +117,7 @@ namespace WakEncyclopedie {
                                 RarityImage = rarity.image.ToArray(),
                                 StatList = GetStatsOfItem(items.Id),
                             };
-            return ExecuteQueryWithPagination();
+            return ResetItemsDisplayed();
         }
 
         public List<Stat> GetStatsOfItem(int idItem)
@@ -198,7 +215,7 @@ namespace WakEncyclopedie {
                                                     join stats in afwDC.Stats
                                                     on statsItem.IdStats equals stats.Id
                                                     orderby statsItem.IdItem
-                                                    where idStats.Contains(statsItem.IdStats)
+                                                    where idStats.Contains(statsItem.IdStats) && statsItem.value > 0
                                                     select items).GroupBy(x => x.Id).Select(grp => grp.ToList()).ToList();
 
 
@@ -281,8 +298,28 @@ namespace WakEncyclopedie {
                                 StatList = GetStatsOfItem(items.Id),
                             };
 
-            return ExecuteQueryWithPagination();
+            return ResetItemsDisplayed();
         }
+
+        public dynamic SortPreviousSearch(string column, ListSortDirection sortDirection) {
+            IQueryable<Item> query = PreviousQuery;
+            switch (column) {
+                case COLUMN_ITEM_NAME:
+                    PreviousQuery = (sortDirection == ListSortDirection.Ascending) ? query.OrderBy(x => x.Name) : query.OrderByDescending(x => x.Name);
+                    break;
+                case COLUMN_ITEM_LEVEL:
+                    PreviousQuery = (sortDirection == ListSortDirection.Ascending) ? query.OrderBy(x => x.Level) : query.OrderByDescending(x => x.Level);
+                    break;
+                case COLUMN_ITEM_RARITY:
+                    PreviousQuery = (sortDirection == ListSortDirection.Ascending) ? query.OrderBy(x => x.IdRarity) : query.OrderByDescending(x => x.IdRarity);
+                    break;
+                default:
+                    Console.WriteLine($"Impossible to sort the column {column}");
+                    break;
+            }
+            return ResetItemsDisplayed();
+        }
+
 
         /// <summary>
         /// Get all id item and id stats that correspond to the array of stats id (grouped by item id)

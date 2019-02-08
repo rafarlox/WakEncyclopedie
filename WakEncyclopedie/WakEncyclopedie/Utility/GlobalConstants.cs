@@ -7,19 +7,19 @@ namespace WakEncyclopedie {
         public static readonly int[] MODULE_LEVELS = new int[13] { 20, 35, 50, 65, 80, 95, 110, 125, 140, 155, 170, 185, 200 };
         #region image_path
         // Path for type of items
-        public const string HELMET_IMAGE_PATH = "pack://application:,,,/Images/Helmet.png";
-        public const string CLOAK_IMAGE_PATH = "pack://application:,,,/Images/Cloak.png";
-        public const string AMULET_IMAGE_PATH = "pack://application:,,,/Images/Amulet.png";
-        public const string EPAULETTES_IMAGE_PATH = "pack://application:,,,/Images/Epaulettes.png";
-        public const string BREASTPLATE_IMAGE_PATH = "pack://application:,,,/Images/Breastplate.png";
-        public const string BELT_IMAGE_PATH = "pack://application:,,,/Images/Belt.png";
-        public const string BOOTS_IMAGE_PATH = "pack://application:,,,/Images/Boots.png";
-        public const string RING_IMAGE_PATH = "pack://application:,,,/Images/Ring.png";
-        public const string ONE_HANDED_WEAPON_IMAGE_PATH = "pack://application:,,,/Images/OneHandedWeapon.png";
-        public const string SECOND_HAND_WEAPON_IMAGE_PATH = "pack://application:,,,/Images/SecondHand.png";
+        public const string HELMET_IMAGE_PATH = "pack://application:,,,/Images/Helmet_bw.png";
+        public const string CLOAK_IMAGE_PATH = "pack://application:,,,/Images/Cloak_bw.png";
+        public const string AMULET_IMAGE_PATH = "pack://application:,,,/Images/Amulet_bw.png";
+        public const string EPAULETTES_IMAGE_PATH = "pack://application:,,,/Images/Epaulettes_bw.png";
+        public const string BREASTPLATE_IMAGE_PATH = "pack://application:,,,/Images/Breastplate_bw.png";
+        public const string BELT_IMAGE_PATH = "pack://application:,,,/Images/Belt_bw.png";
+        public const string BOOTS_IMAGE_PATH = "pack://application:,,,/Images/Boots_bw.png";
+        public const string RING_IMAGE_PATH = "pack://application:,,,/Images/Ring_bw.png";
+        public const string ONE_HANDED_WEAPON_IMAGE_PATH = "pack://application:,,,/Images/OneHandedWeapon_bw.png";
+        public const string SECOND_HAND_WEAPON_IMAGE_PATH = "pack://application:,,,/Images/SecondHand_bw.png";
         public const string PET_IMAGE_PATH = "pack://application:,,,/Images/Pet.png";
-        public const string MOUNT_IMAGE_PATH = "pack://application:,,,/Images/Mount.png";
-        public const string EMBLEM_IMAGE_PATH = "pack://application:,,,/Images/Emblem.png";
+        public const string MOUNT_IMAGE_PATH = "pack://application:,,,/Images/Mount_bw.png";
+        public const string EMBLEM_IMAGE_PATH = "pack://application:,,,/Images/Emblem_bw.png";
         // Path for element
         public const string FIRE_IMAGE_PATH = "pack://application:,,,/Images/Fire.png";
         public const string WATER_IMAGE_PATH = "pack://application:,,,/Images/Water.png";

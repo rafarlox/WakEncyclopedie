@@ -48,23 +48,52 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -213,7 +242,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\AllForWakfuDB.mdf">
@@ -223,6 +254,20 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>AllForWakfuDB.mdf</DependentUpon>
     </Content>
+    <Resource Include="Images\Emblem_bw.png" />
+    <Resource Include="Images\Amulet_bw.png" />
+    <Resource Include="Images\Belt_bw.png" />
+    <Resource Include="Images\Boots_bw.png" />
+    <Resource Include="Images\Breastplate_bw.png" />
+    <Resource Include="Images\Cloak_bw.png" />
+    <Resource Include="Images\Epaulettes_bw.png" />
+    <Resource Include="Images\Helmet_bw.png" />
+    <Resource Include="Images\Mount_bw.png" />
+    <Resource Include="Images\OneHandedWeapon_bw.png" />
+    <Resource Include="Images\Pet_bw.png" />
+    <Resource Include="Images\Ring_bw.png" />
+    <Resource Include="Images\SecondHand_bw.png" />
+    <Resource Include="Images\TwoHandedWeapon_bw.png" />
     <Resource Include="Images\Mastery_Melee.png" />
     <Resource Include="Images\Damages_Infliged.png" />
     <Resource Include="Images\Mastery_Area.png" />
