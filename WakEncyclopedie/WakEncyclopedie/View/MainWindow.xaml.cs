@@ -47,9 +47,12 @@ namespace WakEncyclopedie {
                 // Load data in datagrid and combobox
                 ItemsDataGrid.ItemsSource = EncycloDB.GetAllItemsWithImg();
 
-                MscbxRarity.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllRarities();
-                MscbxType.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllTypes();
-                MscbxStats.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllStats();
+                MscbxRarity.ItemsSource = EncycloDB.GetAllRarities();
+                MscbxType.ItemsSource = EncycloDB.GetAllTypes();
+                MscbxStats.ItemsSource = EncycloDB.GetAllStats();
+                //MscbxRarity.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllRarities();
+                //MscbxType.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllTypes();
+                //MscbxStats.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllStats();
 
                 // Create events
                 CreateBuildImagesEvents();
@@ -161,15 +164,16 @@ namespace WakEncyclopedie {
             int maxLvl = Convert.ToInt32(TbxItemLvlMaxSearch.Text);
             string nameItem = TbxNameSearch.Text.Trim();
 
-            int[] idRarities = GetIntArrayOfSelectedElements(MscbxRarity.ListElements);
-            int[] idTypes = GetIntArrayOfSelectedElements(MscbxType.ListElements);
-            int[] idStats = GetIntArrayOfSelectedElements(MscbxStats.ListElements);
+            int[] idRarities = GetIntArrayOfSelectedElements(MscbxRarity.GetListElements());
+            int[] idTypes = GetIntArrayOfSelectedElements(MscbxType.GetListElements());
+            int[] idStats = GetIntArrayOfSelectedElements(MscbxStats.GetListElements());
 
             ItemsDataGrid.ItemsSource = EncycloDB.SearchItems(minLvl, maxLvl, nameItem, idRarities, idTypes, idStats);
             ActualSortedColumnIndex = 0; // Reset the sort
             if (ItemsDataGrid.Items.Count > 0) {
                 ItemsDataGrid.ScrollIntoView(ItemsDataGrid.Items[0]);
             }
+            CloseAllPopup();
         }
         #endregion Search events
 
@@ -570,6 +574,37 @@ namespace WakEncyclopedie {
                     ItemsDataGrid.ScrollIntoView(ItemsDataGrid.Items[0]);
                 }
             }, null);
+        }
+
+        private void CloseAllPopup() {
+            MscbxRarity.ClosePopUp();
+            MscbxStats.ClosePopUp();
+            MscbxType.ClosePopUp();
+        }
+
+        private void FrmMain_MouseDown(object sender, MouseButtonEventArgs e) {
+            CloseAllPopup();
+        }
+
+        private void FrmMain_LocationChanged(object sender, EventArgs e) {
+            CloseAllPopup();
+        }
+
+        private void FrmMain_Deactivated(object sender, EventArgs e) {
+            CloseAllPopup();
+        }
+
+        /// <summary>
+        /// Close the others pop up when the user click on a Multicombobox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Mscbx_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            MultiSelectComboBox mscbx = (MultiSelectComboBox)sender;
+            // Don't close the popup if the MultiSelectComboBox selected is open
+            if ((bool)mscbx.MultiSelectCombox.Tag != true) {
+                CloseAllPopup();
+            }
         }
     }
 }

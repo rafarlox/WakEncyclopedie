@@ -41,7 +41,7 @@ namespace WakEncyclopedie.View {
 
         private void Tbx_LostFocus(object sender, RoutedEventArgs e) {
             TextBox tbx = (TextBox)sender;
-            if (String.IsNullOrEmpty(tbx.Text)) {
+            if (String.IsNullOrEmpty(tbx.Text) || tbx.Text == "-") {
                 tbx.Text = "0";
             }
             BStats.LoadCustomStatsList(CreateCustomStatsList());

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WakEncyclopedie"
         xmlns:View="clr-namespace:WakEncyclopedie.View" x:Name="FrmMain" x:Class="WakEncyclopedie.MainWindow"
         mc:Ignorable="d"
-        Title="WakEncyclopédie - Builder Wakfu" Height="830" Width="1406.5" Loaded="FrmMain_Loaded" WindowStartupLocation="CenterScreen">
+        Title="WakEncyclopédie - Builder Wakfu" Height="830" Width="1406.5" Loaded="FrmMain_Loaded" WindowStartupLocation="CenterScreen" MouseDown="FrmMain_MouseDown" LocationChanged="FrmMain_LocationChanged" Deactivated="FrmMain_Deactivated">
     <Window.Resources>
         <Application x:Key="Wakencyclopedie.allForWakfuDBDataSet"/>
         <!--<CollectionViewSource x:Key="itemsViewSource" Source="{Binding Items, Source={StaticResource allForWakfuDBDataSet}}"/>
@@ -74,19 +74,18 @@
         <Button x:Name="BtnShowPreviousItems" Content="&lt;" HorizontalAlignment="Left" Margin="12,57,0,0" VerticalAlignment="Top" Width="74" Click="BtnShowPreviousItems_Click" Visibility="Hidden"/>
         <ContentControl x:Name="CCtrlItemStats" Content="" HorizontalAlignment="Left" Margin="1067,498,0,0" VerticalAlignment="Top" Height="276" Width="276"/>
         <!-- Search components -->
-        <TextBox x:Name="TbxNameSearch" HorizontalAlignment="Left" Height="24" Margin="603,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="332" MaxLength="50"/>
+        <TextBox x:Name="TbxNameSearch" HorizontalAlignment="Left" Height="24" Margin="603,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="411" MaxLength="50"/>
         <Label Content="Nom" HorizontalAlignment="Left" Margin="551,70,0,0" VerticalAlignment="Top"/>
         <Label Content="Rareté" HorizontalAlignment="Left" Margin="551,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.614,0.538" Height="24"/>
-        <View:UcMultiSelectComboBox x:Name="MscbxRarity" HorizontalAlignment="Left" Height="22" Margin="603,100,0,0" VerticalAlignment="Top" Width="158"/>
-        <View:UcMultiSelectComboBox x:Name="MscbxStats" HorizontalAlignment="Left" Height="22" Margin="603,126,0,0" VerticalAlignment="Top" Width="158"/>
-        <View:UcMultiSelectComboBox x:Name="MscbxType" HorizontalAlignment="Left" Height="22" Margin="805,100,0,0" VerticalAlignment="Top" Width="130"/>
-        <Label Content="Type" HorizontalAlignment="Left" Margin="765,98,0,0" VerticalAlignment="Top"/>
-        <Label Content="Lvl." HorizontalAlignment="Left" Margin="765,122,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TbxItemLvlMinSearch" HorizontalAlignment="Left" Height="22" Margin="805,128,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28" MaxLength="3" PreviewTextInput="TbxItemLvlSearch_PreviewTextInput" TextChanged="TbxItemLvlSearch_TextChanged" LostFocus="TbxItemLvlSearch_LostFocus" TextAlignment="Center" CommandManager.PreviewExecuted="TbxItemLvlSearch_PreviewExecuted" ContextMenu="{x:Null}"/>
-        <TextBox x:Name="TbxItemLvlMaxSearch" HorizontalAlignment="Left" Height="22" Margin="859,128,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="28" MaxLength="3" PreviewTextInput="TbxItemLvlSearch_PreviewTextInput" TextChanged="TbxItemLvlSearch_TextChanged" LostFocus="TbxItemLvlSearch_LostFocus" TextAlignment="Center" CommandManager.PreviewExecuted="TbxItemLvlSearch_PreviewExecuted" ContextMenu="{x:Null}"/>
-        <Label Content="-" HorizontalAlignment="Left" Margin="837,124,0,0" VerticalAlignment="Top"/>
+        <local:MultiSelectComboBox x:Name="MscbxRarity" HorizontalAlignment="Left" Height="22" Margin="603,100,0,0" VerticalAlignment="Top" Width="184" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" PreviewMouseLeftButtonDown="Mscbx_PreviewMouseLeftButtonDown"/>
+        <local:MultiSelectComboBox x:Name="MscbxStats" HorizontalAlignment="Left" Height="22" Margin="603,126,0,0" VerticalAlignment="Top" Width="184" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" PreviewMouseLeftButtonDown="Mscbx_PreviewMouseLeftButtonDown"/>
+        <local:MultiSelectComboBox x:Name="MscbxType" HorizontalAlignment="Left" Height="22" Margin="832,100,0,0" VerticalAlignment="Top" Width="182" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" PreviewMouseLeftButtonDown="Mscbx_PreviewMouseLeftButtonDown"/>        <Label Content="Type" HorizontalAlignment="Left" Margin="792,100,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lvl." HorizontalAlignment="Left" Margin="792,125,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TbxItemLvlMinSearch" HorizontalAlignment="Left" Height="22" Margin="834,129,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28" MaxLength="3" PreviewTextInput="TbxItemLvlSearch_PreviewTextInput" TextChanged="TbxItemLvlSearch_TextChanged" LostFocus="TbxItemLvlSearch_LostFocus" TextAlignment="Center" CommandManager.PreviewExecuted="TbxItemLvlSearch_PreviewExecuted" ContextMenu="{x:Null}"/>
+        <TextBox x:Name="TbxItemLvlMaxSearch" HorizontalAlignment="Left" Height="22" Margin="888,129,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="28" MaxLength="3" PreviewTextInput="TbxItemLvlSearch_PreviewTextInput" TextChanged="TbxItemLvlSearch_TextChanged" LostFocus="TbxItemLvlSearch_LostFocus" TextAlignment="Center" CommandManager.PreviewExecuted="TbxItemLvlSearch_PreviewExecuted" ContextMenu="{x:Null}"/>
+        <Label Content="-" HorizontalAlignment="Left" Margin="866,125,0,0" VerticalAlignment="Top"/>
         <Label Content="Bonus" HorizontalAlignment="Left" Margin="551,122,0,0" VerticalAlignment="Top" Height="28"/>
-        <Button x:Name="BtnSearchItems" Content="Rechercher" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="938,130,0,0" Width="76" Click="BtnSearchItems_Click" IsDefault="True"/>
+        <Button x:Name="BtnSearchItems" Content="Rechercher" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="929,130,0,0" Width="85" Click="BtnSearchItems_Click" IsDefault="True"/>
         <!-- Build components -->
         <View:UcEquipements x:Name="UcActualEquipements" HorizontalAlignment="Left" Height="282" Margin="1108,155,0,0" VerticalAlignment="Top" Width="198"/>
         <TabControl x:Name="TctrlBuildStats" HorizontalAlignment="Left" Height="728" Margin="95,46,0,0" VerticalAlignment="Top" Width="450">

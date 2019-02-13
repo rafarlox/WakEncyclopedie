@@ -120,6 +120,7 @@
     <Compile Include="View\ModalItemStats.xaml.cs">
       <DependentUpon>ModalItemStats.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MultiSelectComboBox.xaml.cs" />
     <Compile Include="View\UcBuildStats.xaml.cs">
       <DependentUpon>UcBuildStats.xaml</DependentUpon>
     </Compile>
@@ -172,6 +173,10 @@
     <Page Include="View\ModalItemStats.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MultiSelectComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\UcBuildStats.xaml">
       <SubType>Designer</SubType>
