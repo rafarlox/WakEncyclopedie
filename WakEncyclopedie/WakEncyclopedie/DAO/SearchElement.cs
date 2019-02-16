@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 
 namespace WakEncyclopedie.DAO {
-    public class Element : INotifyPropertyChanged {
+    public class SearchElement : INotifyPropertyChanged {
         private int _id;
         private string _name;
         private byte[] _img;
@@ -44,15 +44,15 @@ namespace WakEncyclopedie.DAO {
             }
         }
 
-        public Element() {
+        public SearchElement() {
 
         }
 
-        public Element(string name) {
+        public SearchElement(string name) {
             Name = name;
         }
 
-        public Element(int id, string name, byte[] img) {
+        public SearchElement(int id, string name, byte[] img) {
             Id = id;
             Name = name;
             Img = img;

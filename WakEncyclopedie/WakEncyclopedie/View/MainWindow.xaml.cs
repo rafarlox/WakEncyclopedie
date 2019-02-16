@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -50,9 +49,6 @@ namespace WakEncyclopedie {
                 MscbxRarity.ItemsSource = EncycloDB.GetAllRarities();
                 MscbxType.ItemsSource = EncycloDB.GetAllTypes();
                 MscbxStats.ItemsSource = EncycloDB.GetAllStats();
-                //MscbxRarity.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllRarities();
-                //MscbxType.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllTypes();
-                //MscbxStats.UcMultiSelectCombo.ItemsSource = EncycloDB.GetAllStats();
 
                 // Create events
                 CreateBuildImagesEvents();
@@ -293,10 +289,43 @@ namespace WakEncyclopedie {
                         Console.WriteLine("Unknown id of masteries or resistances for the tag of the stackpanel");
                     }
                     // Add the checkbox to the stackpanel
-                    sp.Children.Add(CreateCheckboxElement(GlobalConstants.FIRE_IMAGE_PATH, sp));
-                    sp.Children.Add(CreateCheckboxElement(GlobalConstants.WATER_IMAGE_PATH, sp));
-                    sp.Children.Add(CreateCheckboxElement(GlobalConstants.EARTH_IMAGE_PATH, sp));
-                    sp.Children.Add(CreateCheckboxElement(GlobalConstants.AIR_IMAGE_PATH, sp));
+                    int cbxFireIndex = sp.Children.Add(CreateCheckboxElement(GlobalConstants.FIRE_IMAGE_PATH, sp, stat.Id));
+                    int cbxWaterIndex = sp.Children.Add(CreateCheckboxElement(GlobalConstants.WATER_IMAGE_PATH, sp, stat.Id));
+                    int cbxEarthIndex = sp.Children.Add(CreateCheckboxElement(GlobalConstants.EARTH_IMAGE_PATH, sp, stat.Id));
+                    int cbxAirIndex = sp.Children.Add(CreateCheckboxElement(GlobalConstants.AIR_IMAGE_PATH, sp, stat.Id));
+
+                    // Check automatically the checkbox if no elements are selected
+                    if (item.FireMastery == 0 && item.WaterMastery == 0 && item.EarthMastery == 0 && item.AirMastery == 0 &&
+                        item.FireResistance == 0 && item.WaterResistance == 0 && item.EarthResistance == 0 && item.AirResistance == 0) {
+                        int nbElement = GlobalConstants.GetNbOfElementById(stat.Id);
+                        for (int i = 0; i < nbElement; i++) {
+                            CheckBox cbx;
+                            switch (DefaultMasteriesOrder.MasteriesOrder[i]) {
+                                case GlobalConstants.Elementary.Fire:
+                                    cbx = (CheckBox)sp.Children[cbxFireIndex];
+                                    cbx.IsChecked = true;
+                                    CbxItemElement_Click(cbx, null);
+                                    break;
+                                case GlobalConstants.Elementary.Water:
+                                    cbx = (CheckBox)sp.Children[cbxWaterIndex];
+                                    cbx.IsChecked = true;
+                                    CbxItemElement_Click(cbx, null);
+                                    break;
+                                case GlobalConstants.Elementary.Earth:
+                                    cbx = (CheckBox)sp.Children[cbxEarthIndex];
+                                    cbx.IsChecked = true;
+                                    CbxItemElement_Click(cbx, null);
+                                    break;
+                                case GlobalConstants.Elementary.Air:
+                                    cbx = (CheckBox)sp.Children[cbxAirIndex];
+                                    cbx.IsChecked = true;
+                                    CbxItemElement_Click(cbx, null);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
                     uc.LbxItemStats.Items.Add(sp);
                 }
             }
@@ -308,7 +337,7 @@ namespace WakEncyclopedie {
         /// <param name="imageSourcePath">Path that correspond to an element</param>
         /// <param name="sp">The StackPanel parent of the CheckBox</param>
         /// <returns></returns>
-        private CheckBox CreateCheckboxElement(string imageSourcePath, StackPanel sp) {
+        private CheckBox CreateCheckboxElement(string imageSourcePath, StackPanel sp, int idStat) {
             ImageSourceConverter converter = new ImageSourceConverter();
             CheckBox cbx = new CheckBox();
             // Recover the item stocked in the StackPanel tag
@@ -325,42 +354,45 @@ namespace WakEncyclopedie {
             cbx.Name = GlobalConstants.GetElemStringFromImagePath(imageSourcePath);
             cbx.Click += CbxItemElement_Click;
 
-            // Check automatically the checkbox if the masteries or resistances are already selected
-            switch (imageSourcePath) {
-                case GlobalConstants.FIRE_IMAGE_PATH:
-                    if (sp.Name == GlobalConstants.MASTERIES_STRING && item.FireMastery > 0) {
-                        cbx.IsChecked = true;
-                    }
-                    if (sp.Name == GlobalConstants.RESISTANCES_STRING && item.FireResistance > 0) {
-                        cbx.IsChecked = true;
-                    }
-                    break;
-                case GlobalConstants.WATER_IMAGE_PATH:
-                    if (sp.Name == GlobalConstants.MASTERIES_STRING && item.WaterMastery > 0) {
-                        cbx.IsChecked = true;
-                    }
-                    if (sp.Name == GlobalConstants.RESISTANCES_STRING && item.WaterResistance > 0) {
-                        cbx.IsChecked = true;
-                    }
-                    break;
-                case GlobalConstants.EARTH_IMAGE_PATH:
-                    if (sp.Name == GlobalConstants.MASTERIES_STRING && item.EarthMastery > 0) {
-                        cbx.IsChecked = true;
-                    }
-                    if (sp.Name == GlobalConstants.RESISTANCES_STRING && item.EarthResistance > 0) {
-                        cbx.IsChecked = true;
-                    }
-                    break;
-                case GlobalConstants.AIR_IMAGE_PATH:
-                    if (sp.Name == GlobalConstants.MASTERIES_STRING && item.AirMastery > 0) {
-                        cbx.IsChecked = true;
-                    }
-                    if (sp.Name == GlobalConstants.RESISTANCES_STRING && item.AirResistance > 0) {
-                        cbx.IsChecked = true;
-                    }
-                    break;
-                default:
-                    break;
+            // Check automatically the checkbox if atleast one element is already selected
+            if ((item.FireMastery != 0 || item.WaterMastery != 0 || item.EarthMastery != 0 || item.AirMastery != 0) &&
+                (item.FireResistance != 0 || item.WaterResistance != 0 || item.EarthResistance != 0 || item.AirResistance != 0)) {
+                switch (imageSourcePath) {
+                    case GlobalConstants.FIRE_IMAGE_PATH:
+                        if (sp.Name == GlobalConstants.MASTERIES_STRING && item.FireMastery > 0) {
+                            cbx.IsChecked = true;
+                        }
+                        if (sp.Name == GlobalConstants.RESISTANCES_STRING && item.FireResistance > 0) {
+                            cbx.IsChecked = true;
+                        }
+                        break;
+                    case GlobalConstants.WATER_IMAGE_PATH:
+                        if (sp.Name == GlobalConstants.MASTERIES_STRING && item.WaterMastery > 0) {
+                            cbx.IsChecked = true;
+                        }
+                        if (sp.Name == GlobalConstants.RESISTANCES_STRING && item.WaterResistance > 0) {
+                            cbx.IsChecked = true;
+                        }
+                        break;
+                    case GlobalConstants.EARTH_IMAGE_PATH:
+                        if (sp.Name == GlobalConstants.MASTERIES_STRING && item.EarthMastery > 0) {
+                            cbx.IsChecked = true;
+                        }
+                        if (sp.Name == GlobalConstants.RESISTANCES_STRING && item.EarthResistance > 0) {
+                            cbx.IsChecked = true;
+                        }
+                        break;
+                    case GlobalConstants.AIR_IMAGE_PATH:
+                        if (sp.Name == GlobalConstants.MASTERIES_STRING && item.AirMastery > 0) {
+                            cbx.IsChecked = true;
+                        }
+                        if (sp.Name == GlobalConstants.RESISTANCES_STRING && item.AirResistance > 0) {
+                            cbx.IsChecked = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
             return cbx;
         }
@@ -426,6 +458,18 @@ namespace WakEncyclopedie {
         }
 
         /// <summary>
+        /// Equip selected item when double click
+        /// </summary>
+        private void ItemsDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            try {
+                UcStatsItems u = (UcStatsItems)CCtrlItemStats.Content;
+                EquipItemToBuild(u.BtnEquip, null);
+            } catch (Exception) {
+                // Catch exception when the UcStatsItem is null
+            }
+        }
+
+        /// <summary>
         /// Try to equip the selected item to the build
         /// </summary>
         private void EquipItemToBuild(object sender, RoutedEventArgs e) {
@@ -477,9 +521,9 @@ namespace WakEncyclopedie {
             UcActualBuildStats.UpdateView();
         }
 
-        private int[] GetIntArrayOfSelectedElements(List<Element> elementList) {
+        private int[] GetIntArrayOfSelectedElements(List<SearchElement> elementList) {
             List<int> elementedSelected = new List<int>();
-            foreach (Element elem in elementList) {
+            foreach (SearchElement elem in elementList) {
                 if (elem.IsSelected) {
                     elementedSelected.Add(elem.Id);
                 }
@@ -576,6 +620,7 @@ namespace WakEncyclopedie {
             }, null);
         }
 
+        // Close the pop up of the multiselectcombobox
         private void CloseAllPopup() {
             MscbxRarity.ClosePopUp();
             MscbxStats.ClosePopUp();
@@ -597,8 +642,6 @@ namespace WakEncyclopedie {
         /// <summary>
         /// Close the others pop up when the user click on a Multicombobox
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Mscbx_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
             MultiSelectComboBox mscbx = (MultiSelectComboBox)sender;
             // Don't close the popup if the MultiSelectComboBox selected is open
@@ -606,5 +649,7 @@ namespace WakEncyclopedie {
                 CloseAllPopup();
             }
         }
+
+
     }
 }

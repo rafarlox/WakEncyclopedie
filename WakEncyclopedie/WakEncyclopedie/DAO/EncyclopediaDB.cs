@@ -138,7 +138,7 @@ namespace WakEncyclopedie {
         {
             return from rarity in afwDC.Rarity
                    orderby rarity.Id descending
-                   select new Element
+                   select new SearchElement
                    {
                        Id = rarity.Id,
                        Name = rarity.name,
@@ -150,7 +150,7 @@ namespace WakEncyclopedie {
         {
             return from type in afwDC.Type_Items
                    orderby type.Id ascending
-                   select new Element
+                   select new SearchElement
                    {
                        Id = type.Id,
                        Name = type.name,
@@ -163,7 +163,7 @@ namespace WakEncyclopedie {
             return from stats in afwDC.Stats
                    where stats.Id >= 2 && stats.Id <= 41
                    orderby stats.Id ascending
-                   select new Element
+                   select new SearchElement
                    {
                        Id = stats.Id,
                        Name = stats.type,

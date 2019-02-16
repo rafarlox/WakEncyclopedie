@@ -23,12 +23,12 @@ namespace WakEncyclopedie.View
     /// </summary>
     public partial class UcMultiSelectComboBox : UserControl
     {
-        public List<Element> ListElements { get; set; }
+        public List<SearchElement> ListElements { get; set; }
 
         public UcMultiSelectComboBox()
         {
             InitializeComponent(); // Could be usefull later : https://www.codeproject.com/Articles/563862/Multi-Select-ComboBox-in-WPF
-            ListElements = new List<Element>();
+            ListElements = new List<SearchElement>();
             DependencyPropertyDescriptor dpd = DependencyPropertyDescriptor.FromProperty(ItemsControl.ItemsSourceProperty, typeof(UcMultiSelectComboBox));
             dpd.AddValueChanged(UcMultiSelectCombo, ElementsUpdated);
         }
@@ -40,7 +40,7 @@ namespace WakEncyclopedie.View
         {
             if (UcMultiSelectCombo.ItemsSource != null)
             {
-                foreach (Element element in UcMultiSelectCombo.ItemsSource)
+                foreach (SearchElement element in UcMultiSelectCombo.ItemsSource)
                 {
                     ListElements.Add(element);
                 }
@@ -63,7 +63,7 @@ namespace WakEncyclopedie.View
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             CheckBox cbx = (CheckBox)sender;
-            Element selectedElement = (Element)cbx.DataContext;
+            SearchElement selectedElement = (SearchElement)cbx.DataContext;
             ListElements.Find(x => x.Id == selectedElement.Id).IsSelected = (bool)cbx.IsChecked;
         }
     }

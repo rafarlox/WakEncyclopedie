@@ -105,7 +105,7 @@
     <Compile Include="BO\SkillsStat.cs" />
     <Compile Include="Database\EncyclopediaUpdater.cs" />
     <Compile Include="BO\BuildStats.cs" />
-    <Compile Include="DAO\Element.cs" />
+    <Compile Include="DAO\SearchElement.cs" />
     <Compile Include="DAO\Build.cs" />
     <Compile Include="Utility\GlobalConstants.cs" />
     <Compile Include="DAO\Item.cs" />
@@ -129,6 +129,9 @@
     </Compile>
     <Compile Include="View\UcEquipements.xaml.cs">
       <DependentUpon>UcEquipements.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UcMasteriesOrder.xaml.cs">
+      <DependentUpon>UcMasteriesOrder.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UcMultiSelectComboBox.xaml.cs">
       <DependentUpon>UcMultiSelectComboBox.xaml</DependentUpon>
@@ -187,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UcEquipements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UcMasteriesOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

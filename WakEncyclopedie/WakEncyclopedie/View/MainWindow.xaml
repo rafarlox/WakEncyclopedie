@@ -47,7 +47,7 @@
                   AlternationCount="2" AlternatingRowBackground="Bisque" CellStyle="{StaticResource Body_Content_DataGrid_Centering}"
                   MouseRightButtonUp="ItemsDataGrid_MouseRightButtonUp" MouseDown="ItemsDataGrid_MouseDown" Height="619" Width="464"
                   SelectedCellsChanged="ItemsDataGrid_SelectedCellsChanged" ScrollViewer.CanContentScroll="True"
-                  ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.ScrollChanged="ItemsDataGrid_ScrollChanged" Sorting="ItemsDataGrid_Sorting">
+                  ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.ScrollChanged="ItemsDataGrid_ScrollChanged" Sorting="ItemsDataGrid_Sorting" MouseDoubleClick="ItemsDataGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="id" Visibility="Hidden" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="urlColumn" Binding="{Binding Url}" Header="url" Visibility="Hidden" Width="SizeToHeader"/>
@@ -79,7 +79,8 @@
         <Label Content="Rareté" HorizontalAlignment="Left" Margin="551,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.614,0.538" Height="24"/>
         <local:MultiSelectComboBox x:Name="MscbxRarity" HorizontalAlignment="Left" Height="22" Margin="603,100,0,0" VerticalAlignment="Top" Width="184" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" PreviewMouseLeftButtonDown="Mscbx_PreviewMouseLeftButtonDown"/>
         <local:MultiSelectComboBox x:Name="MscbxStats" HorizontalAlignment="Left" Height="22" Margin="603,126,0,0" VerticalAlignment="Top" Width="184" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" PreviewMouseLeftButtonDown="Mscbx_PreviewMouseLeftButtonDown"/>
-        <local:MultiSelectComboBox x:Name="MscbxType" HorizontalAlignment="Left" Height="22" Margin="832,100,0,0" VerticalAlignment="Top" Width="182" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" PreviewMouseLeftButtonDown="Mscbx_PreviewMouseLeftButtonDown"/>        <Label Content="Type" HorizontalAlignment="Left" Margin="792,100,0,0" VerticalAlignment="Top"/>
+        <local:MultiSelectComboBox x:Name="MscbxType" HorizontalAlignment="Left" Height="22" Margin="832,100,0,0" VerticalAlignment="Top" Width="182" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" PreviewMouseLeftButtonDown="Mscbx_PreviewMouseLeftButtonDown"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="792,100,0,0" VerticalAlignment="Top"/>
         <Label Content="Lvl." HorizontalAlignment="Left" Margin="792,125,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TbxItemLvlMinSearch" HorizontalAlignment="Left" Height="22" Margin="834,129,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28" MaxLength="3" PreviewTextInput="TbxItemLvlSearch_PreviewTextInput" TextChanged="TbxItemLvlSearch_TextChanged" LostFocus="TbxItemLvlSearch_LostFocus" TextAlignment="Center" CommandManager.PreviewExecuted="TbxItemLvlSearch_PreviewExecuted" ContextMenu="{x:Null}"/>
         <TextBox x:Name="TbxItemLvlMaxSearch" HorizontalAlignment="Left" Height="22" Margin="888,129,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="28" MaxLength="3" PreviewTextInput="TbxItemLvlSearch_PreviewTextInput" TextChanged="TbxItemLvlSearch_TextChanged" LostFocus="TbxItemLvlSearch_LostFocus" TextAlignment="Center" CommandManager.PreviewExecuted="TbxItemLvlSearch_PreviewExecuted" ContextMenu="{x:Null}"/>
@@ -105,5 +106,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <View:UcMasteriesOrder x:Name="DefaultMasteriesOrder" Height="687" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="6,207,0,-95"/>
     </Grid>
 </Window>

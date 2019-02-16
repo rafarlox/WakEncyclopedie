@@ -16,12 +16,12 @@ namespace WakEncyclopedie {
         /// <summary>
         /// List who contains the element of the ItemsSource and with a custom element to select everything (All)
         /// </summary>
-        private List<Element> ListElementsWithAll { get; set; }
+        private List<SearchElement> ListElementsWithAll { get; set; }
         private bool IsMouseWheeling = false;
 
         public MultiSelectComboBox() {
             InitializeComponent();
-            ListElementsWithAll = new List<Element>();
+            ListElementsWithAll = new List<SearchElement>();
             // Add an MouseWheelEvent for the Combobox
             AddHandler(ComboBox.MouseWheelEvent, new MouseWheelEventHandler(MultiSelectCombox_MouseWheel), true);
         }
@@ -29,7 +29,7 @@ namespace WakEncyclopedie {
         #region Dependency Properties
 
         public static readonly DependencyProperty ItemsSourceProperty =
-             DependencyProperty.Register("ItemsSource", typeof(IQueryable<Element>), typeof(MultiSelectComboBox), new FrameworkPropertyMetadata(null,
+             DependencyProperty.Register("ItemsSource", typeof(IQueryable<SearchElement>), typeof(MultiSelectComboBox), new FrameworkPropertyMetadata(null,
         new PropertyChangedCallback(MultiSelectComboBox.OnItemsSourceChanged)));
 
         public static readonly DependencyProperty TextProperty =
@@ -38,8 +38,8 @@ namespace WakEncyclopedie {
         public static readonly DependencyProperty DefaultTextProperty =
             DependencyProperty.Register("DefaultText", typeof(string), typeof(MultiSelectComboBox), new UIPropertyMetadata(string.Empty));
 
-        public IQueryable<Element> ItemsSource {
-            get { return (IQueryable<Element>)GetValue(ItemsSourceProperty); }
+        public IQueryable<SearchElement> ItemsSource {
+            get { return (IQueryable<SearchElement>)GetValue(ItemsSourceProperty); }
             set {
                 SetValue(ItemsSourceProperty, value);
                 ClosePopUp(); // Automatically close the popup when updating
@@ -91,7 +91,7 @@ namespace WakEncyclopedie {
         private void MultiSelectCombox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             if (MultiSelectCombox.SelectedIndex != -1 && IsMouseWheeling == false) {
                 // (De)select the selected element
-                Element elemSelected = (Element)MultiSelectCombox.SelectedItem;
+                SearchElement elemSelected = (SearchElement)MultiSelectCombox.SelectedItem;
                 elemSelected.IsSelected = !elemSelected.IsSelected;
 
                 // If it's was the "All Element" then we (de)select the others elements consequently
@@ -134,9 +134,9 @@ namespace WakEncyclopedie {
         /// Get the list of elements without the "All element"
         /// </summary>
         /// <returns></returns>
-        public List<Element> GetListElements() {
-            List<Element> listElements = new List<Element>();
-            foreach (Element elem in ListElementsWithAll) {
+        public List<SearchElement> GetListElements() {
+            List<SearchElement> listElements = new List<SearchElement>();
+            foreach (SearchElement elem in ListElementsWithAll) {
                 if (elem.Name != All) {
                     listElements.Add(elem);
                 }
@@ -145,13 +145,13 @@ namespace WakEncyclopedie {
         }
 
         private void SelectAllElement() {
-            foreach (Element elem in ListElementsWithAll) {
+            foreach (SearchElement elem in ListElementsWithAll) {
                 elem.IsSelected = true;
             }
         }
 
         private void DeselectAllElement() {
-            foreach (Element elem in ListElementsWithAll) {
+            foreach (SearchElement elem in ListElementsWithAll) {
                 elem.IsSelected = false;
             }
         }
@@ -162,9 +162,9 @@ namespace WakEncyclopedie {
         private void LoadElementsToControl() {
             ListElementsWithAll.Clear();
             if (this.ItemsSource.ToList().Count > 0)
-                ListElementsWithAll.Add(new Element(All)); // Add an element to select everything
+                ListElementsWithAll.Add(new SearchElement(All)); // Add an element to select everything
 
-            foreach (Element elem in this.ItemsSource) {
+            foreach (SearchElement elem in this.ItemsSource) {
                 ListElementsWithAll.Add(elem);
             }
             MultiSelectCombox.ItemsSource = ListElementsWithAll; // Load the list to the ComboBox
@@ -176,7 +176,7 @@ namespace WakEncyclopedie {
         private void SetText() {
             // Format the displayed text
             StringBuilder displayText = new StringBuilder();
-            foreach (Element element in ListElementsWithAll) {
+            foreach (SearchElement element in ListElementsWithAll) {
                 if (element.IsSelected == true && element.Name == All) {
                     displayText = new StringBuilder();
                     displayText.Append(All);
@@ -199,7 +199,7 @@ namespace WakEncyclopedie {
         /// </summary>
         private void VerifyIfAllElementsAreSelected() {
             int _selectedCount = 0;
-            foreach (Element elem in ListElementsWithAll) {
+            foreach (SearchElement elem in ListElementsWithAll) {
                 if (elem.IsSelected && elem.Name != All)
                     _selectedCount++;
             }

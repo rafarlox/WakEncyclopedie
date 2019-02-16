@@ -2,6 +2,7 @@
 
 namespace WakEncyclopedie {
     public static class GlobalConstants {
+        public enum Elementary { Fire, Water, Earth, Air }
         public const int MIN_LEVEL = 0;
         public const int MAX_LEVEL = 200;
         public static readonly int[] MODULE_LEVELS = new int[13] { 20, 35, 50, 65, 80, 95, 110, 125, 140, 155, 170, 185, 200 };
@@ -135,6 +136,37 @@ namespace WakEncyclopedie {
                     return AIR_STRING;
                 default:
                     return String.Empty;
+            }
+        }
+
+        public static int GetNbOfElementById(int idStat) {
+            switch (idStat) {
+                case ID_MASTERIES_3_ELEM:
+                case ID_RESISTANCES_3_ELEM:
+                    return 3;
+                case ID_MASTERIES_2_ELEM:
+                case ID_RESISTANCES_2_ELEM:
+                    return 2;
+                case ID_MASTERIES_1_ELEM:
+                case ID_RESISTANCES_1_ELEM:
+                    return 1;
+                default:
+                    return 0;
+            }
+        }
+
+        public static Elementary? GetElementaryByImagePath(string imgPath) {
+            switch (imgPath) {
+                case FIRE_IMAGE_PATH:
+                    return Elementary.Fire;
+                case WATER_IMAGE_PATH:
+                    return Elementary.Water;
+                case EARTH_IMAGE_PATH:
+                    return Elementary.Earth;
+                case AIR_IMAGE_PATH:
+                    return Elementary.Air;
+                default:
+                    return null;
             }
         }
         #endregion methods
