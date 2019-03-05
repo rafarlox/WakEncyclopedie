@@ -178,5 +178,22 @@ namespace WakEncyclopedie {
             ConditionsRespected = VerifyAllConditions();
         }
 
+        /// <summary>
+        /// Verify if the item is a dagger or a shield.
+        /// <para>Return true if it's a dagger, false if it's a shield and null if it is neither one nor the other</para>
+        /// </summary>
+        /// <returns>Return true if it's a dagger, false if it's a shield and null if it is neither one nor the other</returns>
+        public bool? IsDaggerOrShield() {
+            if (IdType == DAO.Build.ID_SECOND_HAND) {
+                foreach (Stat stat in StatList) {
+                    if (GlobalConstants.IsIdOfMastery(stat.Id)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            return null;
+        }
+
     }
 }

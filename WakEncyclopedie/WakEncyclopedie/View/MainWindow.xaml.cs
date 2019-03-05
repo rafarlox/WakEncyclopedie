@@ -29,7 +29,7 @@ namespace WakEncyclopedie {
         public MainWindow() {
             InitializeComponent();
             EncycloDB = new EncyclopediaDB();
-            ActualBuild = new Build(GlobalConstants.MAX_LEVEL, UcActualEquipements, UcActualSkillsManager);
+            ActualBuild = new Build(GlobalConstants.MAX_LEVEL, UcActualEquipements, UcActualSkillsManager, UcActualRunesManager);
         }
 
         #region Datagrid events
@@ -42,6 +42,7 @@ namespace WakEncyclopedie {
                 UcActualBuildStats.UcBuild = ActualBuild;
                 UcActualCustomBuildStats.UcBuild = ActualBuild;
                 UcActualSkillsManager.ActualSkills = ActualBuild.BSkill;
+                UcActualRunesManager.ActualBuild = ActualBuild;
 
                 // Load data in datagrid and combobox
                 ItemsDataGrid.ItemsSource = EncycloDB.GetAllItemsWithImg();
@@ -56,7 +57,7 @@ namespace WakEncyclopedie {
                 CollectionView myCollectionView = (CollectionView)CollectionViewSource.GetDefaultView(ItemsDataGrid.Items);
                 ((INotifyCollectionChanged)myCollectionView).CollectionChanged += ItemsDataGrid_CollectionChanged;
             } catch (Exception ex) {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -355,8 +356,8 @@ namespace WakEncyclopedie {
             cbx.Click += CbxItemElement_Click;
 
             // Check automatically the checkbox if atleast one element is already selected
-            if ((item.FireMastery != 0 || item.WaterMastery != 0 || item.EarthMastery != 0 || item.AirMastery != 0) &&
-                (item.FireResistance != 0 || item.WaterResistance != 0 || item.EarthResistance != 0 || item.AirResistance != 0)) {
+            if (item.FireMastery != 0 || item.WaterMastery != 0 || item.EarthMastery != 0 || item.AirMastery != 0 ||
+                item.FireResistance != 0 || item.WaterResistance != 0 || item.EarthResistance != 0 || item.AirResistance != 0) {
                 switch (imageSourcePath) {
                     case GlobalConstants.FIRE_IMAGE_PATH:
                         if (sp.Name == GlobalConstants.MASTERIES_STRING && item.FireMastery > 0) {

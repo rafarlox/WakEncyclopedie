@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace WakEncyclopedie.Utility {
@@ -40,8 +42,6 @@ namespace WakEncyclopedie.Utility {
             return !regex.IsMatch(e.Text);
         }
 
-
-
         public static void ClearUselessZeroInText(TextBox tbx) {
             while (tbx.Text.Length > 1 && tbx.Text[0] == '0') {
                 // Remove the first char
@@ -76,11 +76,55 @@ namespace WakEncyclopedie.Utility {
             }
         }
 
+        /// <summary>
+        /// Permute two element of a list
+        /// </summary>
+        /// <typeparam name="T">The type of our list</typeparam>
+        /// <param name="list">The list were we invert the elements</param>
+        /// <param name="indexA">The index of the first element to permute</param>
+        /// <param name="indexB">The index of the second element to permute</param>
+        /// <returns>Return the list with the element permuted</returns>
         public static IList<T> Swap<T>(this IList<T> list, int indexA, int indexB) {
             T tmp = list[indexA];
             list[indexA] = list[indexB];
             list[indexB] = tmp;
             return list;
         }
+
+        /// <summary>
+        /// Find all visual children of a controls who have the specified type
+        /// <para>Source : https://stackoverflow.com/a/978352 </para>
+        /// </summary>
+        /// <typeparam name="T">The type of the controls searched</typeparam>
+        /// <param name="depObj">The control in which we will search</param>
+        /// <returns></returns>
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject {
+            if (depObj != null) {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++) {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T) {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child)) {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
+
+        /*/// <summary>
+        /// Fill an array with the same value
+        /// </summary>
+        /// <typeparam name="T">Type of the array</typeparam>
+        /// <param name="arr">The array that we want to fill</param>
+        /// <param name="value">The value used to fill the array</param>
+        public static T[] Populate<T>(this T[] arr, T value) {
+            for (int i = 0; i < arr.Length; i++) {
+                arr[i] = value;
+            }
+            return arr;
+        }*/ // Doesn't seeams to work, the values are the same for all element but when we edit one element it's change all elements
+
     }
 }

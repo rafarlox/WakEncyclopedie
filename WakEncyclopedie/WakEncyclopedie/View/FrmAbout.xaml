@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="WakEncyclopedie - À propos" Height="322" Width="551" Loaded="Window_Loaded">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="145,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.245,0.312" Height="180" Width="372" Background="#FFF0F0F0">
+        <TextBlock HorizontalAlignment="Left" Margin="145,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.245,0.312" Height="199" Width="372" Background="#FFF0F0F0">
             WakEncyclopedie est un programme de recherche et conception d'équipement (plus communément appelé builder) pour le jeu Wakfu, publié par Ankama Games.<LineBreak/><LineBreak/>
             Ce programme n'a aucun lien avec Ankama Games. Toutes les données des divers équipements proviennent de l'encyclopédie accessible sur le site officiel de Wakfu (https://www.wakfu.com/fr/mmorpg). De ce fait, aucune utilisation commerciable de ce logiciel n'est autorisée.<LineBreak/><LineBreak/>
-            Le code source du programme est accessible sur GitHub.
+            Le code source du programme est accessible sur GitHub.<LineBreak/><Hyperlink>https://github.com/rafarlox/WakEncyclopedie</Hyperlink>
         </TextBlock>
         <Label x:Name="LblProductName" Content="Label" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LblVersion" Content="Label" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top"/>

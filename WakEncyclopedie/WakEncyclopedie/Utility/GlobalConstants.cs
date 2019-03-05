@@ -3,6 +3,31 @@
 namespace WakEncyclopedie {
     public static class GlobalConstants {
         public enum Elementary { Fire, Water, Earth, Air }
+        public enum RuneSlot { Attack, Defense, Support, Relic, Epic }
+        public enum RuneType {
+            Null = 0,
+            Mastery = MASTERY_ALL_ID,
+            Resistance = RESISTANCE_ALL_ID,
+            Health = HEALTH_POINTS_ID,
+            Dodge = DODGE_ID,
+            Lock = LOCK_ID,
+            Initiative = INITIATIVE_ID,
+            Melee = MELEE_MASTERY_ID,
+            Distance = DISTANCE_MASTERY_ID,
+            SingleTarget = SINGLE_TARGET_MASTERY_ID,
+            Area = AREA_MASTERY_ID,
+            CritMastery = CRITICAL_MASTERY_ID,
+            Rear = REAR_MASTERY_ID,
+            HealthMastery = HEALING_MASTERY_ID,
+            Berserk = BERSERK_MASTERY_ID,
+            CritChance = CRITICAL_HITS_ID,
+            Block = BLOCK_ID,
+            HealthDef = HEALTH_POINTS_FOR_DEF_RUNES_ID,
+            Will = WILL_ID,
+            Range = RANGE_ID,
+            Mp = MOVEMENT_POINT_ID,
+            Ap = ACTION_POINT_ID
+        }
         public const int MIN_LEVEL = 0;
         public const int MAX_LEVEL = 200;
         public static readonly int[] MODULE_LEVELS = new int[13] { 20, 35, 50, 65, 80, 95, 110, 125, 140, 155, 170, 185, 200 };
@@ -95,6 +120,7 @@ namespace WakEncyclopedie {
         public const int HEALTH_PERFORMED_ID = -10;
         public const int DAMMAGE_INFLIGED_ID = -11;
         public const int RES_ALL_FOR_MAJOR_ID = -12;
+        public const int HEALTH_POINTS_FOR_DEF_RUNES_ID = -13;
         #endregion stats_id
         #region stats_string
         public const string HEALTH_STRING = "Points de vie";
@@ -104,6 +130,16 @@ namespace WakEncyclopedie {
         public const string HEALTH_PERFORMED_STRING = "Soins réalisés";
         #endregion stats_string
         #region methods
+        public static bool IsIdOfMastery(int idStat) {
+            const int idMasteryStart = 5;
+            const int idMasteryEnd = 20;
+            if (idStat >= idMasteryStart && idStat <= idMasteryEnd) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         /// <summary>
         /// Look if the id received correspond to the id of masteries or resistances
         /// </summary>

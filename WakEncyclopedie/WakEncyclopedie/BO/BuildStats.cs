@@ -234,12 +234,35 @@ namespace WakEncyclopedie {
             }
         }
 
+        private void CalculateRunesBonus() {
+            Build.BRunes.VerifyRunesAvailability();
+
+            foreach (Rune rune in Build.BRunes.GetAllRunes()) {
+                if (rune.Enabled) {
+                    if (Build.BRunes.IsExquisiteRune(rune)) {
+                        if (rune.ExquisiteEnabled && Build.BRunes.IsSpecialRune(rune) == false) {
+                            AddStatToBuild((int)rune.Type, rune.GetTotalBonus());
+                        }
+                    } else {
+                        AddStatToBuild((int)rune.Type, rune.GetTotalBonus());
+                    }
+                }
+            }
+            // Add special stats to the build
+            AddStatToBuild((int)GlobalConstants.RuneType.Ap, Build.BRunes.ApBonus);
+            AddStatToBuild((int)GlobalConstants.RuneType.Mp, Build.BRunes.MpBonus);
+            AddStatToBuild((int)GlobalConstants.RuneType.Range, Build.BRunes.RangeBonus);
+            AddStatToBuild((int)GlobalConstants.RuneType.CritChance, Build.BRunes.CritChanceBonus);
+            AddStatToBuild((int)GlobalConstants.RuneType.Block, Build.BRunes.BlockBonus);
+        }
+
         public void CalculateBuildStats() {
             ResetStatsOfBuild();
             CalculateStatsPerLevel();
             CalculteSkillsStats();
             CalculateGuildBonusStats();
             CalculateNationBonusStats();
+            CalculateRunesBonus();
             List<EnchantedItem> items = Build.GetBuildItems();
             foreach (EnchantedItem item in items) {
                 foreach (Stat stat in item.StatList) {
@@ -253,9 +276,10 @@ namespace WakEncyclopedie {
         }
 
         private void AddStatToBuild(int idStat, int valueStat) {
-            if (valueStat != 0) {
+            if (valueStat != 0 && idStat != 0) {
                 switch (idStat) {
                     case GlobalConstants.HEALTH_POINTS_ID:
+                    case GlobalConstants.HEALTH_POINTS_FOR_DEF_RUNES_ID:
                         HealthPoints += valueStat;
                         break;
                     case GlobalConstants.ACTION_POINT_ID:

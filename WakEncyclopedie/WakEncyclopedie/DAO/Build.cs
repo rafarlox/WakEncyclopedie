@@ -10,24 +10,24 @@ using WakEncyclopedie.View;
 namespace WakEncyclopedie.DAO {
     public class Build {
         #region constants
-        private const int ID_HELMET = 1;
-        private const int ID_CLOACK = 2;
-        private const int ID_AMULET = 3;
-        private const int ID_EPAULETTES = 4;
-        private const int ID_BREASTPLATE = 5;
-        private const int ID_BELT = 6;
-        private const int ID_BOOTS = 7;
+        public const int ID_HELMET = 1;
+        public const int ID_CLOACK = 2;
+        public const int ID_AMULET = 3;
+        public const int ID_EPAULETTES = 4;
+        public const int ID_BREASTPLATE = 5;
+        public const int ID_BELT = 6;
+        public const int ID_BOOTS = 7;
         public const int ID_RING = 8;
-        private const int ID_TWO_HANDED_WEAPON = 9;
-        private const int ID_ONE_HANDED_WEAPON = 10;
-        private const int ID_SECOND_HAND = 11;
-        private const int ID_EMBLEM = 12;
-        private const int ID_PET = 13;
-        private const int ID_MOUNT = 14;
-        private const int ID_TORCHE = 15;
-        private const int ID_TOOLS = 16;
-        private const int RARITY_ID_RELIC = 5;
-        private const int RARITY_ID_EPIC = 7;
+        public const int ID_TWO_HANDED_WEAPON = 9;
+        public const int ID_ONE_HANDED_WEAPON = 10;
+        public const int ID_SECOND_HAND = 11;
+        public const int ID_EMBLEM = 12;
+        public const int ID_PET = 13;
+        public const int ID_MOUNT = 14;
+        public const int ID_TORCHE = 15;
+        public const int ID_TOOLS = 16;
+        public const int RARITY_ID_RELIC = 5;
+        public const int RARITY_ID_EPIC = 7;
         #endregion constants
         
         private int _levelBuild;
@@ -35,8 +35,10 @@ namespace WakEncyclopedie.DAO {
         private ImageSourceConverter Converter { get; set; }
         private UcEquipements BindedUcEquipements { get; set; }
         public UcSkillsManagement BindedUcSkillsManagement { get; private set; }
+        public UcRunesManager BindedUcRunesManager { get; private set; }
         public BuildStats BStats { get; private set; } = new BuildStats();
         public Skill BSkill { get; private set; } = new Skill();
+        public RunesBuild BRunes { get; private set; }
 
         public int LevelBuild {
             get => _levelBuild;
@@ -77,6 +79,7 @@ namespace WakEncyclopedie.DAO {
         public Build(int levelBuild) {
             Converter = new ImageSourceConverter();
             BindedUcEquipements = new UcEquipements();
+            BRunes = new RunesBuild(this);
             BStats = new BuildStats(this);
             BSkill = new Skill(this);
             LevelBuild = levelBuild;
@@ -87,9 +90,10 @@ namespace WakEncyclopedie.DAO {
         /// </summary>
         /// <param name="levelBuild">The level of the build</param>
         /// <param name="bindedUcEquipements">UcEquipements that will be refresh when the build is updated</param>
-        public Build(int levelBuild, UcEquipements bindedUcEquipements, UcSkillsManagement bindedUcSkillsManagement) : this(levelBuild) {
+        public Build(int levelBuild, UcEquipements bindedUcEquipements, UcSkillsManagement bindedUcSkillsManagement, UcRunesManager bindedUcRunesManager) : this(levelBuild) {
             BindedUcEquipements = bindedUcEquipements;
             BindedUcSkillsManagement = bindedUcSkillsManagement;
+            BindedUcRunesManager = bindedUcRunesManager;
             BStats.CalculateBuildStats();
         }
 

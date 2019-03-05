@@ -100,6 +100,11 @@
                     <View:UcSkillsManagement x:Name="UcActualSkillsManager" Height="365" Width="430" Margin="10,10,4,297"/>
                 </Grid>
             </TabItem>
+            <TabItem x:Name="TitmRunes" Header="Runage">
+                <Grid>
+                    <View:UcRunesManager x:Name="UcActualRunesManager"></View:UcRunesManager>
+                </Grid>
+            </TabItem>
             <TabItem x:Name="TitmCustomStats" Header="Personnalisées">
                 <Grid>
                     <View:UcCustomBuildStats x:Name="UcActualCustomBuildStats" HorizontalAlignment="Left" Height="650" VerticalAlignment="Top" Width="430" Margin="10,10,0,0" />

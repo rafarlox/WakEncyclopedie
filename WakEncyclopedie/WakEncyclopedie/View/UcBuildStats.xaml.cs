@@ -16,6 +16,7 @@ namespace WakEncyclopedie.View {
         public Build UcBuild { get; set; }
         private BuildStats BStats { get => UcBuild.BStats; }
         private UcSkillsManagement UcSkillsManager { get => UcBuild.BindedUcSkillsManagement; }
+        private UcRunesManager UcRunesManager { get => UcBuild.BindedUcRunesManager; }
 
         public UcBuildStats()
         {
@@ -87,6 +88,8 @@ namespace WakEncyclopedie.View {
             LblBerserkMastery.Content = BStats.BerserkMastery;
             // Skills
             UcSkillsManager.UpdateView();
+            // Runes
+            UcRunesManager.UpdateView();
         }
 
 

@@ -24,7 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -101,6 +101,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BO\EnchantedItem.cs" />
+    <Compile Include="BO\Rune.cs" />
+    <Compile Include="BO\RunesBuild.cs" />
     <Compile Include="BO\Skill.cs" />
     <Compile Include="BO\SkillsStat.cs" />
     <Compile Include="Database\EncyclopediaUpdater.cs" />
@@ -135,6 +137,9 @@
     </Compile>
     <Compile Include="View\UcMultiSelectComboBox.xaml.cs">
       <DependentUpon>UcMultiSelectComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UcRunesManager.xaml.cs">
+      <DependentUpon>UcRunesManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UcSkillsManagement.xaml.cs">
       <DependentUpon>UcSkillsManagement.xaml</DependentUpon>
@@ -198,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UcMultiSelectComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UcRunesManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -266,6 +275,47 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>AllForWakfuDB.mdf</DependentUpon>
     </Content>
+    <Resource Include="Images\Epic_Rune_Anatomy.png" />
+    <Resource Include="Images\Epic_Rune_Brutality.png" />
+    <Resource Include="Images\Epic_Rune_Constant.png" />
+    <Resource Include="Images\Epic_Rune_Herculean_Strength.png" />
+    <Resource Include="Images\Epic_Rune_Inflexible.png" />
+    <Resource Include="Images\Epic_Rune_Measured.png" />
+    <Resource Include="Images\Epic_Rune_Positioning_Knowledge.png" />
+    <Resource Include="Images\Epic_Rune_Precise.png" />
+    <Resource Include="Images\Epic_Rune_Robust_Health.png" />
+    <Resource Include="Images\Epic_Rune_Unraveling.png" />
+    <Resource Include="Images\Relic_Rune_Alternation.png" />
+    <Resource Include="Images\Relic_Rune_Alternation_II.png" />
+    <Resource Include="Images\Relic_Rune_Brazier.png" />
+    <Resource Include="Images\Relic_Rune_Excess.png" />
+    <Resource Include="Images\Relic_Rune_Flame_Aura.png" />
+    <Resource Include="Images\Relic_Rune_Guard_Up.png" />
+    <Resource Include="Images\Relic_Rune_Hearthbreaking_Blood.png" />
+    <Resource Include="Images\Relic_Rune_Robust.png" />
+    <Resource Include="Images\Relic_Rune_Smashell.png" />
+    <Resource Include="Images\Relic_Rune_Trust.png" />
+    <Resource Include="Images\Rune_AP.png" />
+    <Resource Include="Images\Rune_Area.png" />
+    <Resource Include="Images\Rune_Berserk.png" />
+    <Resource Include="Images\Rune_Block.png" />
+    <Resource Include="Images\Rune_CC.png" />
+    <Resource Include="Images\Rune_Crit_Mastery.png" />
+    <Resource Include="Images\Rune_Distance.png" />
+    <Resource Include="Images\Rune_Health_Def.png" />
+    <Resource Include="Images\Rune_Health_Mastery.png" />
+    <Resource Include="Images\Rune_Melee.png" />
+    <Resource Include="Images\Rune_MP.png" />
+    <Resource Include="Images\Rune_Range.png" />
+    <Resource Include="Images\Rune_Rear.png" />
+    <Resource Include="Images\Rune_ST.png" />
+    <Resource Include="Images\Rune_Will.png" />
+    <Resource Include="Images\Rune_Dodge.png" />
+    <Resource Include="Images\Rune_Health.png" />
+    <Resource Include="Images\Rune_Initiative.png" />
+    <Resource Include="Images\Rune_Lock.png" />
+    <Resource Include="Images\Rune_Mastery_All.png" />
+    <Resource Include="Images\Rune_Resistance_All.png" />
     <Resource Include="Images\Emblem_bw.png" />
     <Resource Include="Images\Amulet_bw.png" />
     <Resource Include="Images\Belt_bw.png" />
