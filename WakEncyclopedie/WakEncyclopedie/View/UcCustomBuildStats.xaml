@@ -6,31 +6,46 @@
              xmlns:local="clr-namespace:WakEncyclopedie.View"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="425">
+    <UserControl.Resources>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="40"></Setter>
+            <Setter Property="Height" Value="20"></Setter>
+            <Setter Property="Text" Value="0"></Setter>
+            <Setter Property="ContextMenu" Value="{x:Null}"></Setter>
+            <EventSetter Event="PreviewTextInput" Handler="Tbx_PreviewTextInput"></EventSetter>
+            <EventSetter Event="PreviewKeyDown" Handler="Tbx_PreviewKeyDown"></EventSetter>
+            <EventSetter Event="TextChanged" Handler="Tbx_TextChanged"></EventSetter>
+            <EventSetter Event="LostFocus" Handler="Tbx_LostFocus"></EventSetter>
+            <EventSetter Event="CommandManager.PreviewExecuted" Handler="Tbx_PreviewExecuted"></EventSetter>
+        </Style>
+    </UserControl.Resources>
     <Grid Background="White" Margin="0,0,-370,0" HorizontalAlignment="Left" Width="425">
         <!-- Major Stats -->
         <Grid Margin="5,10,320,610" Height="30" Width="100">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/HP.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="PdV" HorizontalAlignment="Left" Margin="27,5,0,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="21" Padding="0" Height="20"/>
-            <TextBox x:Name="TbxHp" Text="0" HorizontalAlignment="Left" Margin="53,5,0,5" VerticalAlignment="Center" Width="37" Height="20" MaxLength="5" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}" />
+            <TextBox x:Name="TbxHp" Style="{StaticResource TextBoxStyle}" Margin="53,5,0,5" Width="37" MaxLength="5"/>
         </Grid>
         <Grid Margin="110,10,215,610" Height="30" Width="100">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/AP.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="PA" HorizontalAlignment="Left" Margin="22,2,0,2" VerticalAlignment="Center"/>
-            <TextBox x:Name="TbxAp" Text="0" HorizontalAlignment="Left" Margin="46,5,0,5" VerticalAlignment="Center" Width="44" Height="20" MaxLength="3" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxAp" Style="{StaticResource TextBoxStyle}" Margin="46,5,0,5" Width="44" MaxLength="3"/>
         </Grid>
         <Grid Margin="215,10,110,610" Height="30" Width="100">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/MP.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="PM" HorizontalAlignment="Left" Margin="22,2,0,2" VerticalAlignment="Center"/>
-            <TextBox x:Name="TbxMp" Text="0" HorizontalAlignment="Left" Margin="49,5,0,5" VerticalAlignment="Center" Width="41" Height="20" MaxLength="3" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxMp" Style="{StaticResource TextBoxStyle}" Margin="49,5,0,5" Width="41" MaxLength="3" />
         </Grid>
         <Grid Margin="320,10,5,610" Height="30" Width="100">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/WP.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="PW" HorizontalAlignment="Left" Margin="22,2,0,2" VerticalAlignment="Center"/>
-            <TextBox x:Name="TbxWp" Text="0" HorizontalAlignment="Left" Margin="50,5,0,5" VerticalAlignment="Center" Width="40" Height="20" MaxLength="3" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxWp" Style="{StaticResource TextBoxStyle}" Margin="50,5,0,5" MaxLength="3" />
         </Grid>
         <!-- Masteries and resistances -->
         <Grid Margin="5,40,5,580" Height="30">
@@ -40,33 +55,33 @@
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Water.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_All.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="27,5,0,0" />
-            <TextBox x:Name="TbxWaterMastery" Text="0" HorizontalAlignment="Left" Margin="52,5,0,5" VerticalAlignment="Center" Width="40" Height="20" MaxLength="5" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}" />
+            <TextBox x:Name="TbxWaterMastery" Style="{StaticResource TextBoxStyle}" Margin="52,5,0,5" MaxLength="5" />
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Resistance_All.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="118,5,0,0" />
-            <TextBox x:Name="TbxWaterResistance" Text="0" HorizontalAlignment="Left" Margin="143,5,0,5" VerticalAlignment="Center" Height="20" Width="40" MaxLength="5" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxWaterResistance" Style="{StaticResource TextBoxStyle}" Margin="143,5,0,5" MaxLength="5" />
         </Grid>
         <Grid Margin="215,70,5,550" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Earth.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_All.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="27,5,0,0" />
-            <TextBox x:Name="TbxEarthMastery" Text="0" HorizontalAlignment="Left" Margin="52,5,0,5" VerticalAlignment="Center" Height="20" Width="40" MaxLength="5" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxEarthMastery" Style="{StaticResource TextBoxStyle}" Margin="52,5,0,5" MaxLength="5" />
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Resistance_All.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="118,5,0,0" />
-            <TextBox x:Name="TbxEarthResistance" Text="0" HorizontalAlignment="Left" Margin="143,5,0,5" VerticalAlignment="Center" Height="20" Width="40" MaxLength="5" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxEarthResistance" Style="{StaticResource TextBoxStyle}" Margin="143,5,0,5" MaxLength="5" />
         </Grid>
         <Grid Margin="5,105,215,515" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Air.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_All.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="27,5,0,0" />
-            <TextBox x:Name="TbxAirMastery" Text="0" HorizontalAlignment="Left" Margin="52,5,0,5" VerticalAlignment="Center" Width="40" Height="20" MaxLength="5" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxAirMastery" Style="{StaticResource TextBoxStyle}" Margin="52,5,0,5" MaxLength="5" />
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Resistance_All.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="118,5,0,0" />
-            <TextBox x:Name="TbxAirResistance" Text="0" HorizontalAlignment="Left" Margin="143,5,0,5" VerticalAlignment="Center" Width="40" Height="20" MaxLength="5" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxAirResistance" Style="{StaticResource TextBoxStyle}" Margin="143,5,0,5" MaxLength="5" />
         </Grid>
         <Grid Margin="215,105,5,515" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Fire.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_All.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="27,5,0,0" />
-            <TextBox x:Name="TbxFireMastery" Text="0" HorizontalAlignment="Left" Margin="52,5,0,5" VerticalAlignment="Center" Width="40" Height="20" MaxLength="5" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxFireMastery" Style="{StaticResource TextBoxStyle}" Margin="52,5,0,5" MaxLength="5" />
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Resistance_All.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="118,5,0,0" />
-            <TextBox x:Name="TbxFireResistance" Text="0" HorizontalAlignment="Left" Margin="143,5,0,5" VerticalAlignment="Center" Height="20" MaxLength="5" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxFireResistance" Style="{StaticResource TextBoxStyle}" Margin="143,5,0,5" MaxLength="5" />
         </Grid>
         <!-- Primary stats -->
         <Grid Margin="5,135,5,485" Height="30">
@@ -76,79 +91,79 @@
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_All.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Dommages infligés" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxDammageInflincted" Text="0" HorizontalAlignment="Right" Margin="0,6,21,4" VerticalAlignment="Center" MaxLength="4" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxDammageInflincted" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,6,21,4" MaxLength="4" />
         </Grid>
         <Grid Margin="214,165,6,455" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_Health.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Soins réalisés" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxHealthPerformed" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="4" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxHealthPerformed" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="4" />
         </Grid>
         <Grid Margin="4,200,216,420" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/CC.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Coup Critique" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxCriticalChance" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="4" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxCriticalChance" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="4" />
         </Grid>
         <Grid Margin="214,200,6,420" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Resistance_All.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Parade" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxBlock" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="4" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxBlock" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="4" />
         </Grid>
         <Grid Margin="4,235,216,385" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Initiative.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Initiative" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxInitiative" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxInitiative" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="5" />
         </Grid>
         <Grid Margin="214,235,6,385" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Range.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Portée" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxRange" Text="0" HorizontalAlignment="Right" Margin="0,6,21,4" VerticalAlignment="Center" MaxLength="3" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxRange" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,6,21,4" MaxLength="3" />
         </Grid>
         <Grid Margin="4,270,216,350" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Dodge.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Esquive" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxDodge" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxDodge" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="5" />
         </Grid>
         <Grid Margin="214,270,6,350" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Lock.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Tacle" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxLock" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxLock" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="5" />
         </Grid>
         <Grid Margin="4,305,216,315" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Wisdom.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Sagesse" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxWisdom" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="4" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxWisdom" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="4" />
         </Grid>
         <Grid Margin="214,305,6,315" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Prospecting.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Prospection" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxProspecting" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="4" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxProspecting" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="4" />
         </Grid>
         <Grid Margin="4,340,216,280" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Control.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Contrôle" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxControl" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="3" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxControl" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="3" />
         </Grid>
         <Grid Margin="214,340,6,280" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Kit_Skill.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Art du Barda" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxKitSkill" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="3" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxKitSkill" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="3" />
         </Grid>
         <Grid Margin="5,375,215,245" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Will.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Volonté" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxWill" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="4" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxWill" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="4" />
         </Grid>
         <!-- Secondary stats -->
         <Grid Margin="4,410,6,210" Height="30">
@@ -158,61 +173,61 @@
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_CH.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Maîtrise Critique" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxCritMastery" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxCritMastery" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="5" />
         </Grid>
         <Grid Margin="214,440,6,180" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Resistance_CH.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Résistance Critique" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxCritResistance" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxCritResistance" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="5" />
         </Grid>
         <Grid Margin="4,475,216,145" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_Rear.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Maîtrise Dos" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxRearMastery" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxRearMastery" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="5" />
         </Grid>
         <Grid Margin="214,475,6,145" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Resistance_Rear.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Résistance Dos" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxRearResistance" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxRearResistance" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="5" />
         </Grid>
         <Grid Margin="4,510,216,110" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_Melee.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Maîtrise Mêlée" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxMeleeMastery" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxMeleeMastery" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="5" />
         </Grid>
         <Grid Margin="214,510,6,110" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_Distance.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Maîtrise Distance" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxDistanceMastery" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxDistanceMastery" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="5" />
         </Grid>
         <Grid Margin="4,545,216,75" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_ST.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Maîtrise Monocible" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxSingleTargetMastery" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxSingleTargetMastery" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" />
         </Grid>
         <Grid Margin="214,545,6,75" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_Area.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Maîtrise Zone" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxAreaMastery" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxAreaMastery" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="5" />
         </Grid>
         <Grid Margin="4,579,216,41" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_Health.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Maîtrise Soin" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxHealthMastery" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxHealthMastery" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" MaxLength="5" />
         </Grid>
         <Grid Margin="214,579,6,41" Height="30">
             <Border BorderBrush="WhiteSmoke" BorderThickness="2"/>
             <Image Stretch="Fill" Source="pack://application:,,,/Images/Mastery_Berserk.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="20" Margin="2,5,0,0" />
             <Label Content="Maîtrise Berserk" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="27,2,0,2" />
-            <TextBox x:Name="TbxBerserkMastery" Text="0" HorizontalAlignment="Right" Margin="0,5,21,5" VerticalAlignment="Center" MaxLength="5" Height="20" Width="40" PreviewTextInput="Tbx_PreviewTextInput" TextChanged="Tbx_TextChanged" LostFocus="Tbx_LostFocus" CommandManager.PreviewExecuted="Tbx_PreviewExecuted" ContextMenu="{x:Null}"/>
+            <TextBox x:Name="TbxBerserkMastery" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Right" Margin="0,5,21,5" />
         </Grid>
     </Grid>
 </UserControl>

@@ -7,6 +7,8 @@ using WakEncyclopedie.Database;
 
 namespace WakEncyclopedie {
     public class EncyclopediaDB {
+        private const int ID_TYPE_PET = 13;
+        private const int ID_TYPE_MOUNT = 14;
         public const string COLUMN_ITEM_NAME = "Name";
         public const string COLUMN_ITEM_LEVEL = "Level";
         public const string COLUMN_ITEM_RARITY = "RarityName";
@@ -177,8 +179,8 @@ namespace WakEncyclopedie {
 
             // Get all items with the good level
             var itemsList = from items in afwDC.Items
-                            where items.level >= lvlMin
-                            where items.level <= lvlMax
+                            where (items.level >= lvlMin || items.idType == ID_TYPE_PET || items.idType == ID_TYPE_MOUNT)
+                            where (items.level <= lvlMax || items.idType == ID_TYPE_PET || items.idType == ID_TYPE_MOUNT)
                             select items;
 
             // Filter the items by name

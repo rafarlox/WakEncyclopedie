@@ -239,7 +239,7 @@ namespace WakEncyclopedie.BO {
                         runesCount += 2;
                     }
                     break;
-                // Three runes max, start at level 1 (level 40 for helmets)
+                // Three runes max, start at level 1 (level 40 for helmets and boots)
                 case Build.ID_BOOTS:
                 case Build.ID_BREASTPLATE:
                 case Build.ID_CLOACK:
@@ -248,7 +248,8 @@ namespace WakEncyclopedie.BO {
                         runesCount += 3;
                     } else if (level >= THIRD_LEVEL_RUNES) {
                         runesCount += 2;
-                    } else if ((idType == Build.ID_HELMET && level >= SECOND_LEVEL_RUNES) ||
+                    } else if ((idType == Build.ID_BOOTS && level >= SECOND_LEVEL_RUNES) || 
+                               (idType == Build.ID_HELMET && level >= SECOND_LEVEL_RUNES) ||
                                (idType != Build.ID_HELMET && level >= FIRST_LEVEL_RUNES)) {
                         runesCount += 1;
                     }

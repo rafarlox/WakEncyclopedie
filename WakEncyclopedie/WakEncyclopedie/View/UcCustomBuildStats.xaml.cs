@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WakEncyclopedie.DAO;
 using WakEncyclopedie.Utility;
 
@@ -27,18 +18,34 @@ namespace WakEncyclopedie.View {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Filter the textbox before any text input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tbx_PreviewTextInput(object sender, TextCompositionEventArgs e) {
             TextBox tbx = (TextBox)sender;
+            // If the user insert '-' when the textbox is empty, then we do nothing
+            if (e.Text == "-" && tbx.Text.Length == 0) {
+                return;
+            }
+            // Only Allow numbers and the minus sign (-) when it's the first char on the textbox
             if ((e.Text != "-" || tbx.CaretIndex != 0 || tbx.Text[0] == '-') && Tools.OnlyAllowNumbersForText(e)) {
                 e.Handled = true;
             }
         }
 
+        /// <summary>
+        /// Clear the useless zero in the textbox
+        /// </summary>
         private void Tbx_TextChanged(object sender, TextChangedEventArgs e) {
             TextBox tbx = (TextBox)sender;
             Tools.ClearUselessZeroInText(tbx);
         }
 
+        /// <summary>
+        /// Correct the textbox if necessary and update the stats
+        /// </summary>
         private void Tbx_LostFocus(object sender, RoutedEventArgs e) {
             TextBox tbx = (TextBox)sender;
             if (String.IsNullOrEmpty(tbx.Text) || tbx.Text == "-") {
@@ -88,8 +95,20 @@ namespace WakEncyclopedie.View {
             return customStatsList;
         }
 
+        /// <summary>
+        /// Disable the cut and past command for avoiding error
+        /// </summary>
         private void Tbx_PreviewExecuted(object sender, ExecutedRoutedEventArgs e) {
             Tools.DisableCutAndPastCommands(sender, e);
+        }
+
+        /// <summary>
+        /// Disable the space
+        /// </summary>
+        private void Tbx_PreviewKeyDown(object sender, KeyEventArgs e) {
+            if (e.Key == Key.Space) {
+                e.Handled = true;
+            }
         }
     }
 }

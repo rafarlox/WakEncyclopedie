@@ -1,3 +1,3 @@
 ﻿UPDATE Items
-SET level = 50
+SET level = 0
 WHERE idType = 13

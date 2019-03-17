@@ -296,8 +296,8 @@ namespace WakEncyclopedie {
                     int cbxAirIndex = sp.Children.Add(CreateCheckboxElement(GlobalConstants.AIR_IMAGE_PATH, sp, stat.Id));
 
                     // Check automatically the checkbox if no elements are selected
-                    if (item.FireMastery == 0 && item.WaterMastery == 0 && item.EarthMastery == 0 && item.AirMastery == 0 &&
-                        item.FireResistance == 0 && item.WaterResistance == 0 && item.EarthResistance == 0 && item.AirResistance == 0) {
+                    if ((item.FireMastery == 0 && item.WaterMastery == 0 && item.EarthMastery == 0 && item.AirMastery == 0) ||
+                        (item.FireResistance == 0 && item.WaterResistance == 0 && item.EarthResistance == 0 && item.AirResistance == 0)) {
                         int nbElement = GlobalConstants.GetNbOfElementById(stat.Id);
                         for (int i = 0; i < nbElement; i++) {
                             CheckBox cbx;

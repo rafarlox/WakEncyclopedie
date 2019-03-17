@@ -1,0 +1,1 @@
+﻿UPDATE Items_Have_Stats SET IdStats = 4 WHERE IdStats = 147

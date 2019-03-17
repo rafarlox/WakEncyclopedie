@@ -90,7 +90,7 @@
         <!-- Build components -->
         <View:UcEquipements x:Name="UcActualEquipements" HorizontalAlignment="Left" Height="282" Margin="1108,155,0,0" VerticalAlignment="Top" Width="198"/>
         <TabControl x:Name="TctrlBuildStats" HorizontalAlignment="Left" Height="728" Margin="95,46,0,0" VerticalAlignment="Top" Width="450">
-            <TabItem x:Name="TitmStats" Header="Caractèristiques">
+            <TabItem x:Name="TitmStats" Header="Caractéristiques">
                 <Grid>
                     <View:UcBuildStats x:Name="UcActualBuildStats" HorizontalAlignment="Left" Height="690" VerticalAlignment="Top" Width="430" Margin="10,10,0,0"/>
                 </Grid>
